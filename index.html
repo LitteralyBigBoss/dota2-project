@@ -8,8 +8,6 @@
     --bg-deep: #0A0810;
     --bg-card: rgba(20,16,35,0.7);
     --bg-glass: rgba(255,255,255,0.04);
-    --purple-deep: #1A0D2E;
-    --purple-mid: #2D1B4E;
     --purple-accent: #6B3FA0;
     --border-glass: rgba(200,168,75,0.18);
     --text-primary: #EDE8D8;
@@ -28,27 +26,12 @@
     color: var(--text-primary);
     font-family: 'Rajdhani', sans-serif;
     min-height: 100vh;
-    overflow-x: hidden;
   }
 
   .bg-pattern {
     position: fixed;
     inset: 0;
-    background: 
-      radial-gradient(ellipse at 20% 20%, rgba(107,63,160,0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(200,168,75,0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(26,13,46,0.9) 0%, transparent 100%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .hex-bg {
-    position: fixed;
-    inset: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,2 58,17 58,35 30,50 2,35 2,17' fill='none' stroke='%23C8A84B' stroke-width='1'/%3E%3C/svg%3E");
-    background-size: 60px 52px;
-    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 50%, rgba(26,13,46,0.9) 0%, transparent 100%);
     z-index: 0;
   }
 
@@ -74,670 +57,194 @@
     gap: 10px;
     font-family: 'Cinzel', serif;
     font-size: 18px;
-    font-weight: 700;
     color: var(--gold);
-    letter-spacing: 0.05em;
     text-decoration: none;
-  }
-
-  .logo-eye {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, var(--purple-accent), var(--gold-dim));
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    cursor: pointer;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-  .nav-links a.active { color: var(--gold-light); }
-
-  .nav-badge {
-    background: linear-gradient(135deg, var(--purple-accent), var(--gold-dim));
-    color: var(--gold-light);
-    font-size: 10px;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 3px;
-    letter-spacing: 0.1em;
   }
 
-  .hero {
-    padding: 5rem 2rem 4rem;
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; text-transform: uppercase; transition: 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
 
+  .hero { padding: 4rem 2rem; text-align: center; max-width: 900px; margin: 0 auto; }
+  
   .patch-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     background: rgba(200,168,75,0.1);
     border: 1px solid var(--border-glass);
-    border-radius: 4px;
     padding: 6px 16px;
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
     color: var(--gold);
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    border-radius: 4px;
   }
 
-  .patch-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .hero h1 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-  }
-
-  .hero h1 span {
-    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-divider {
-    width: 80px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 1.5rem auto;
-  }
-
-  .hero p {
-    font-size: 17px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 680px;
-    margin: 0 auto 2rem;
-    font-weight: 400;
-  }
-
-  .search-wrap {
-    max-width: 500px;
-    margin: 0 auto 1rem;
-    position: relative;
-  }
+  .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { color: var(--text-muted); font-size: 18px; margin-bottom: 2rem; }
 
   .search-input {
-    width: 100%;
+    width: 100%; max-width: 500px;
     background: var(--bg-glass);
     border: 1px solid var(--border-glass);
+    padding: 12px 20px;
+    color: #fff;
     border-radius: 6px;
-    padding: 12px 48px 12px 16px;
-    color: var(--text-primary);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 0.03em;
     outline: none;
-    transition: border-color 0.2s;
-    backdrop-filter: blur(8px);
   }
 
-  .search-input::placeholder { color: var(--text-muted); }
-  .search-input:focus { border-color: var(--gold-dim); }
+  section { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+  .section-title { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 1.5rem; border-left: 4px solid var(--gold); padding-left: 15px; }
 
-  .search-icon {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    pointer-events: none;
-  }
-
-  section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 0.5rem;
-  }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, var(--border-glass), transparent);
-  }
-
-  .section-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-  }
-
-  .section-sub {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-    letter-spacing: 0.02em;
-  }
-
-  .tier-filters {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .tier-btn {
-    padding: 6px 18px;
-    border-radius: 4px;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: all 0.2s;
-    text-transform: uppercase;
-  }
-
-  .tier-btn.s { background: rgba(232,160,48,0.15); border-color: rgba(232,160,48,0.4); color: #E8A030; }
-  .tier-btn.a { background: rgba(176,96,224,0.15); border-color: rgba(176,96,224,0.4); color: #B060E0; }
-  .tier-btn.b { background: rgba(64,144,208,0.15); border-color: rgba(64,144,208,0.4); color: #4090D0; }
-  .tier-btn.all { background: var(--bg-glass); border-color: var(--border-glass); color: var(--text-muted); }
-  .tier-btn:hover { filter: brightness(1.3); }
-  .tier-btn.active { filter: brightness(1.4); box-shadow: 0 0 12px rgba(200,168,75,0.2); }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-  }
+  .hero-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 
   .hero-card {
     background: var(--bg-card);
     border: 1px solid var(--border-glass);
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-    backdrop-filter: blur(8px);
-    position: relative;
+    transition: 0.3s;
   }
+  .hero-card:hover { transform: translateY(-5px); border-color: var(--gold); }
 
-  .hero-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(200,168,75,0.4);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px rgba(200,168,75,0.08);
-  }
+  .card-top { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; }
+  .tier-tag { position: absolute; top: 10px; right: 10px; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+  .tier-tag.s { background: var(--s-tier); color: #000; }
+  .tier-tag.a { background: var(--a-tier); color: #fff; }
 
-  .card-top {
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    position: relative;
-    overflow: hidden;
-  }
+  .card-body { padding: 15px; }
+  .card-name { font-family: 'Cinzel', serif; font-size: 16px; margin-bottom: 5px; }
+  .card-role { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; }
+  
+  .card-stats { display: flex; gap: 10px; }
+  .stat-pill { flex: 1; background: rgba(255,255,255,0.05); padding: 8px; border-radius: 6px; text-align: center; }
+  .stat-label { font-size: 10px; color: var(--text-muted); display: block; }
+  .stat-value { font-weight: 700; color: var(--green-stat); }
 
-  .tier-badge {
-    position: absolute;
-    top: 8px; right: 8px;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    padding: 3px 8px;
-    border-radius: 3px;
-    z-index: 2;
-    text-transform: uppercase;
-  }
+  .items-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 8px; overflow: hidden; }
+  .items-table th { background: rgba(200,168,75,0.1); padding: 15px; text-align: left; font-size: 12px; color: var(--gold); }
+  .items-table td { padding: 15px; border-bottom: 1px solid var(--border-glass); font-size: 14px; }
 
-  .tier-badge.s { background: rgba(232,160,48,0.25); color: #E8A030; border: 1px solid rgba(232,160,48,0.4); }
-  .tier-badge.a { background: rgba(176,96,224,0.25); color: #B060E0; border: 1px solid rgba(176,96,224,0.4); }
-  .tier-badge.b { background: rgba(64,144,208,0.25); color: #4090D0; border: 1px solid rgba(64,144,208,0.4); }
+  .change-tag { padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; }
+  .change-tag.buff { background: rgba(80,200,120,0.2); color: #50C878; }
+  .change-tag.nerf { background: rgba(224,80,80,0.2); color: #E05050; }
 
-  .card-body { padding: 10px 14px 14px; }
-
-  .card-name {
-    font-family: 'Cinzel', serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
-
-  .card-role {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .card-stats {
-    display: flex;
-    gap: 8px;
-  }
-
-  .stat-pill {
-    flex: 1;
-    background: rgba(255,255,255,0.04);
-    border-radius: 4px;
-    padding: 5px 6px;
-    text-align: center;
-  }
-
-  .stat-label {
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    display: block;
-  }
-
-  .stat-value {
-    font-size: 14px;
-    font-weight: 700;
-    display: block;
-    margin-top: 1px;
-  }
-
-  .stat-value.up { color: var(--green-stat); }
-
-  .trend-arrow {
-    font-size: 10px;
-    margin-left: 2px;
-  }
-
-  .mechanics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
-
-  .mechanic-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-glass);
-    border-radius: 10px;
-    padding: 1.5rem;
-    backdrop-filter: blur(8px);
-    transition: border-color 0.2s;
-  }
-
-  .mechanic-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    margin-bottom: 1rem;
-  }
-
-  .mechanic-title {
-    font-family: 'Cinzel', serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 8px;
-  }
-
-  .mechanic-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .change-list { list-style: none; }
-
-  .change-list li {
-    font-size: 12px;
-    padding: 4px 0;
-    color: var(--text-muted);
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-
-  .change-tag {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 1px 6px;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  .change-tag.buff { background: rgba(80,200,120,0.15); color: #50C878; }
-  .change-tag.nerf { background: rgba(224,80,80,0.15); color: #E05050; }
-  .change-tag.new { background: rgba(200,168,75,0.15); color: var(--gold); }
-
-  .items-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .items-table th {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    padding: 10px 14px;
-    text-align: left;
-    border-bottom: 1px solid var(--border-glass);
-    font-weight: 700;
-  }
-
-  .items-table td {
-    padding: 12px 14px;
-    font-size: 13px;
-    color: var(--text-muted);
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-  }
-
-  .items-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  .item-name {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid var(--border-glass);
-    color: var(--text-muted);
-    font-size: 12px;
-    letter-spacing: 0.05em;
-  }
-
-  .hidden { display: none !important; }
+  footer { text-align: center; padding: 3rem; color: var(--text-muted); font-size: 12px; }
+  .hidden { display: none; }
 </style>
 
 <div class="dota-root">
   <div class="bg-pattern"></div>
-  <div class="hex-bg"></div>
   <div class="content">
 
     <nav>
-      <a class="nav-logo" href="#">
-        <div class="logo-eye">👁</div>
-        DOTASTATE
-      </a>
+      <a class="nav-logo" href="#">👁 DOTASTATE</a>
       <ul class="nav-links">
-        <li><a href="#patch-notes" class="active">Meta Summary</a></li>
-        <li><a href="#tier-list">Hero Tiers</a></li>
-        <li><a href="#mechanics">Mechanics</a></li>
-        <li><a href="#items">Items</a></li>
-        <li><span class="nav-badge">7.41</span></li>
+        <li><a href="#heroes">Герої</a></li>
+        <li><a href="#items">Предмети</a></li>
+        <li><a href="#meta">Мета</a></li>
       </ul>
     </nav>
 
-    <section class="hero" id="patch-notes">
-      <div class="patch-badge">
-        <div class="patch-dot"></div>
-        Update 7.41 — Live Status
-      </div>
-      <h1>Dominating the <span>New Meta.</span></h1>
-      <div class="hero-divider"></div>
-      <p>Analyze high-tier matches and win rates from the Divine+ bracket. Strategic insight into hero performance and systemic changes.</p>
-
-      <div class="search-wrap">
-        <input class="search-input" id="heroSearch" type="search" placeholder="Search heroes, items, mechanics..." autocomplete="off" aria-label="Search" />
-        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </div>
+    <section class="hero">
+      <div class="patch-badge">Оновлення 7.41 — Аналітика</div>
+      <h1>Домінуй у <span>Новій Меті.</span></h1>
+      <p>Статистика та стратегії на основі матчів рангу Divine+ в Україні та світі.</p>
+      <input type="text" id="heroSearch" class="search-input" placeholder="Пошук героя або предмета...">
     </section>
 
-    <section id="tier-list">
-      <div class="section-header">
-        <span class="section-label">Performance Radar</span>
-        <div class="section-line"></div>
-      </div>
-      <h2 class="section-title">Hero Tier List</h2>
-      <p class="section-sub">Source: Divine & Immortal Ranked Matchmaking Data.</p>
-
-      <div class="tier-filters">
-        <button class="tier-btn all active" data-filter="all">All Rankings</button>
-        <button class="tier-btn s" data-filter="s">S-Tier</button>
-        <button class="tier-btn a" data-filter="a">A-Tier</button>
-        <button class="tier-btn b" data-filter="b">B-Tier</button>
-      </div>
-
+    <section id="heroes">
+      <h2 class="section-title">Тир-лист Героїв</h2>
       <div class="hero-grid" id="heroGrid">
-        <!-- S-TIER -->
-        <article class="hero-card s-tier" data-tier="s" data-name="primal beast">
-          <div class="card-top" style="background: linear-gradient(135deg,#3a1010,#5a1010);">🌋<span class="tier-badge s">S</span></div>
+        
+        <article class="hero-card" data-name="primal beast">
+          <div class="card-top" style="background: #301010;">🌋 <span class="tier-tag s">S-Tier</span></div>
           <div class="card-body">
             <div class="card-name">Primal Beast</div>
             <div class="card-role">Offlane · Strength</div>
             <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">54.8%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">12.4%</span></div>
+              <div class="stat-pill"><span class="stat-label">Winrate</span><span class="stat-value">54.8%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pickrate</span><span class="stat-value" style="color: #fff">12%</span></div>
             </div>
           </div>
         </article>
 
-        <article class="hero-card s-tier" data-tier="s" data-name="hoodwink">
-          <div class="card-top" style="background: linear-gradient(135deg,#1a2a0a,#2a3a10);">🐿️<span class="tier-badge s">S</span></div>
+        <article class="hero-card" data-name="hoodwink">
+          <div class="card-top" style="background: #1a2a0a;">🐿️ <span class="tier-tag s">S-Tier</span></div>
           <div class="card-body">
             <div class="card-name">Hoodwink</div>
             <div class="card-role">Support · Agility</div>
             <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">53.9%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">22.1%</span></div>
+              <div class="stat-pill"><span class="stat-label">Winrate</span><span class="stat-value">53.2%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pickrate</span><span class="stat-value" style="color: #fff">21%</span></div>
             </div>
           </div>
         </article>
 
-        <!-- A-TIER -->
-        <article class="hero-card a-tier" data-tier="a" data-name="leshrac">
-          <div class="card-top" style="background: linear-gradient(135deg,#0a1a3a,#0d2b4a);">🦌<span class="tier-badge a">A</span></div>
+        <article class="hero-card" data-name="leshrac">
+          <div class="card-top" style="background: #0a1a3a;">🦌 <span class="tier-tag a">A-Tier</span></div>
           <div class="card-body">
             <div class="card-name">Leshrac</div>
             <div class="card-role">Mid · Intelligence</div>
             <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">52.4%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">10.8%</span></div>
+              <div class="stat-pill"><span class="stat-label">Winrate</span><span class="stat-value">52.1%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pickrate</span><span class="stat-value" style="color: #fff">9%</span></div>
             </div>
           </div>
         </article>
 
-        <article class="hero-card a-tier" data-tier="a" data-name="morphling">
-          <div class="card-top" style="background: linear-gradient(135deg,#001a1a,#002a28);">💧<span class="tier-badge a">A</span></div>
-          <div class="card-body">
-            <div class="card-name">Morphling</div>
-            <div class="card-role">Carry · Agility</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value">51.2%</span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">15.3%</span></div>
-            </div>
-          </div>
-        </article>
-
-        <!-- B-TIER -->
-        <article class="hero-card b-tier" data-tier="b" data-name="phantom assassin">
-          <div class="card-top" style="background: linear-gradient(135deg,#1a0a2a,#2a0d3a);">🗡️<span class="tier-badge b">B</span></div>
-          <div class="card-body">
-            <div class="card-name">Phantom Assassin</div>
-            <div class="card-role">Carry · Agility</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value">48.6%</span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">19.2%</span></div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="mechanics">
-      <div class="section-header">
-        <span class="section-label">Systems Update</span>
-        <div class="section-line"></div>
-      </div>
-      <h2 class="section-title">Core Gameplay Changes</h2>
-      <div class="mechanics-grid">
-        <article class="mechanic-card">
-          <div class="mechanic-icon" style="background: rgba(64,144,80,0.15);">🗺️</div>
-          <h3 class="mechanic-title">Map Dynamics</h3>
-          <p class="mechanic-desc">High-ground vision and pathing adjustments for improved tactical rotations.</p>
-          <ul class="change-list">
-            <li><span class="change-tag buff">BUFF</span>Radiant Jungle Stacking</li>
-            <li><span class="change-tag nerf">NERF</span>Dire Offlane Pulling Range</li>
-          </ul>
-        </article>
-
-        <article class="mechanic-card">
-          <div class="mechanic-icon" style="background: rgba(200,168,75,0.12);">⚡</div>
-          <h3 class="mechanic-title">Neutral Economy</h3>
-          <p class="mechanic-desc">Drop rates for Tier 1 items adjusted to boost early game momentum.</p>
-          <ul class="change-list">
-            <li><span class="change-tag buff">BUFF</span>Tier 1 Drop Rate +4%</li>
-            <li><span class="change-tag new">NEW</span>Tier 2 Item Pool Expansion</li>
-          </ul>
-        </article>
       </div>
     </section>
 
     <section id="items">
-      <div class="section-header">
-        <span class="section-label">Inventory Balance</span>
-        <div class="section-line"></div>
-      </div>
-      <h2 class="section-title">Key Item Adjustments</h2>
-      <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; overflow: hidden; backdrop-filter: blur(8px);">
-        <table class="items-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Category</th>
-              <th>Status</th>
-              <th>Impact</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="item-name">Aghanim's Scepter</span></td>
-              <td>Upgrade</td>
-              <td><span class="change-tag buff">BUFF</span></td>
-              <td>Enhanced upgrades for 8 heroes</td>
-            </tr>
-            <tr>
-              <td><span class="item-name">Maelstrom</span></td>
-              <td>Damage</td>
-              <td><span class="change-tag nerf">NERF</span></td>
-              <td>Chain lightning damage reduced</td>
-            </tr>
-            <tr>
-              <td><span class="item-name">Solar Crest</span></td>
-              <td>Support</td>
-              <td><span class="change-tag buff">BUFF</span></td>
-              <td>Mana cost removed</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h2 class="section-title">Зміни Предметів</h2>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Предмет</th>
+            <th>Статус</th>
+            <th>Опис зміни</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Solar Crest</strong></td>
+            <td><span class="change-tag buff">BUFF</span></td>
+            <td>Вартість мани видалена. Тепер маст-хев для активних саппортів.</td>
+          </tr>
+          <tr>
+            <td><strong>Maelstrom</strong></td>
+            <td><span class="change-tag nerf">NERF</span></td>
+            <td>Шкода від ланцюгової блискавки зменшена на 15. Темп фарма сповільнився.</td>
+          </tr>
+          <tr>
+            <td><strong>Aghanim's Scepter</strong></td>
+            <td><span class="change-tag buff">BUFF</span></td>
+            <td>Покращено бонуси для 8 героїв, включаючи Primal Beast.</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
     <footer>
-      <p>DOTASTATE — Patch 7.41 Analytics | <span>Powered by Divine+ Bracket Data</span> | Non-official Valve resource</p>
+      <p>DOTASTATE — 2026. Дані базуються на аналітиці патчу 7.41.</p>
     </footer>
 
   </div>
 </div>
 
 <script>
-  const filters = document.querySelectorAll('.tier-btn');
-  const cards = document.querySelectorAll('.hero-card');
   const searchInput = document.getElementById('heroSearch');
-  const navLinks = document.querySelectorAll('.nav-links a');
+  const cards = document.querySelectorAll('.hero-card');
 
-  let activeFilter = 'all';
-  let searchQuery = '';
-
-  function applyFilters() {
+  searchInput.addEventListener('input', (e) => {
+    const val = e.target.value.toLowerCase();
     cards.forEach(card => {
-      const tier = card.dataset.tier;
       const name = card.dataset.name.toLowerCase();
-      const tierMatch = activeFilter === 'all' || tier === activeFilter;
-      const nameMatch = name.includes(searchQuery);
-      
-      card.classList.toggle('hidden', !(tierMatch && nameMatch));
-    });
-  }
-
-  filters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filters.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeFilter = btn.dataset.filter;
-      applyFilters();
-    });
-  });
-
-  searchInput.addEventListener('input', e => {
-    searchQuery = e.target.value.trim().toLowerCase();
-    applyFilters();
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      const targetId = link.getAttribute('href');
-      if (targetId.startsWith('#')) {
-        e.preventDefault();
-        document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      }
+      card.classList.toggle('hidden', !name.includes(val));
     });
   });
 </script>
