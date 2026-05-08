@@ -1,73 +1,616 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dota741Stats — Аналітика Патчу</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dota 2 — Мета Патчу 7.41</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <div class="logo">DOTA741<span>STATS</span></div>
-        <p>Аналіз ефективності героїв: практична реалізація</p>
-    </header>
-
-    <main>
-        <section class="stats-grid">
-            <div class="card winner">
-                <h3>Найвищий вінрейт</h3>
-                <div class="hero-info">
-                    <span class="hero-name">Shadow Fiend</span>
-                    <span class="pct">54.2%</span>
-                </div>
+ 
+  <!-- NOISE OVERLAY -->
+  <div class="noise-overlay"></div>
+ 
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-bg-grid"></div>
+    <div class="header-inner container">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <div class="logo-text">
+          <span class="logo-main">DOTA 2</span>
+          <span class="logo-sub">АНАЛІТИКА МЕТИ</span>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="#tier-list">Тір-Ліст</a>
+        <a href="#winners">Переможці</a>
+        <a href="#changes">Зміни</a>
+        <a href="#stats">Статистика</a>
+      </nav>
+      <div class="patch-badge">
+        <span class="patch-label">ПАТЧ</span>
+        <span class="patch-num">7.41</span>
+      </div>
+    </div>
+  </header>
+ 
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-bg">
+      <div class="radiant-glow"></div>
+      <div class="dire-glow"></div>
+      <div class="scanlines"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span class="dot radiant"></span>
+        АКТУАЛЬНА МЕТА
+        <span class="dot dire"></span>
+      </div>
+      <h1 class="hero-title">
+        <span class="title-line-1">ПАТЧ</span>
+        <span class="title-line-2">7<span class="title-dot">.</span>41</span>
+        <span class="title-line-3">МЕТ<span class="title-a">А</span></span>
+      </h1>
+      <p class="hero-desc">
+        Повний аналіз найсильніших героїв, ключових змін балансу та стратегій
+        перемоги у поточному патчі. Дані засновані на статистиці
+        <span class="accent-gold">Dotabuff</span> та <span class="accent-gold">Stratz</span>.
+      </p>
+      <div class="hero-stats-row">
+        <div class="hstat">
+          <span class="hstat-val">124</span>
+          <span class="hstat-lbl">Герої</span>
+        </div>
+        <div class="hstat-divider"></div>
+        <div class="hstat">
+          <span class="hstat-val">15M+</span>
+          <span class="hstat-lbl">Матчів</span>
+        </div>
+        <div class="hstat-divider"></div>
+        <div class="hstat">
+          <span class="hstat-val">7.41</span>
+          <span class="hstat-lbl">Версія</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-cue">
+      <span>ПРОКРУТІТЬ ВНИЗ</span>
+      <div class="scroll-arrow">↓</div>
+    </div>
+  </section>
+ 
+  <!-- TOP 3 WINNERS -->
+  <section id="winners" class="winners-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <h2 class="section-title">ТОП-3 <span class="accent-gold">ПЕРЕМОЖЦІ</span> ПАТЧУ</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-sub">Герої з найвищим відсотком перемог у патчі 7.41 серед усіх рівнів гри</p>
+ 
+      <div class="winners-grid">
+ 
+        <!-- 2nd place -->
+        <div class="winner-card rank-2" data-rank="2">
+          <div class="winner-rank-label">#2</div>
+          <div class="winner-avatar">
+            <div class="avatar-hex">
+              <svg viewBox="0 0 120 138" class="hex-svg">
+                <polygon points="60,4 116,34 116,104 60,134 4,104 4,34" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+                <polygon points="60,14 106,39 106,99 60,124 14,99 14,39" fill="url(#heroBg2)" opacity="0.9"/>
+              </svg>
+              <div class="avatar-inner" style="background: linear-gradient(135deg, #1a2a1a 0%, #0d1f2d 100%);">
+                <span class="hero-initial">LS</span>
+              </div>
             </div>
-            <div class="card loser">
-                <h3>Найнижчий вінрейт</h3>
-                <div class="hero-info">
-                    <span class="hero-name">Phantom Assassin</span>
-                    <span class="pct">46.8%</span>
-                </div>
+          </div>
+          <div class="winner-info">
+            <span class="winner-role">Підтримка / Кор</span>
+            <h3 class="winner-name">Ліфесталкер</h3>
+            <div class="winner-wr-bar">
+              <div class="wr-fill" style="--wr: 54.7%; --clr: #c8a84b;"></div>
             </div>
-        </section>
-
-        <section class="table-section">
-            <h2>Дослідження мета-змін</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Герой</th>
-                        <th>Роль</th>
-                        <th>Найкращий контрпік</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Pudge</td>
-                        <td>Roaming / Support</td>
-                        <td>Lifestealer / Ursa</td>
-                    </tr>
-                    <tr>
-                        <td>Sniper</td>
-                        <td>Mid / Carry</td>
-                        <td>Spectre / Storm Spirit</td>
-                    </tr>
-                    <tr>
-                        <td>Primal Beast</td>
-                        <td>Offlane</td>
-                        <td>Slark / Naix</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="summary">
-            <h3>Висновки проекту</h3>
-            <p>На основі зібраних даних (ресурсів), патч 7.41 зміщує фокус на активних героїв з високим темпом. Це результат мого аналізу ігрових механік.</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>Виконав: Гриценко Н. | Проект 9-А</p>
-    </footer>
+            <div class="winner-wr-label"><span class="wr-pct accent-gold">54.7%</span> Перемог</div>
+          </div>
+          <div class="winner-tags">
+            <span class="tag">Агресія</span>
+            <span class="tag">Ранній тиск</span>
+          </div>
+        </div>
+ 
+        <!-- 1st place -->
+        <div class="winner-card rank-1 featured" data-rank="1">
+          <div class="crown-icon">♛</div>
+          <div class="winner-rank-label">#1</div>
+          <div class="featured-glow"></div>
+          <div class="winner-avatar">
+            <div class="avatar-hex large">
+              <svg viewBox="0 0 120 138" class="hex-svg">
+                <polygon points="60,4 116,34 116,104 60,134 4,104 4,34" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
+                <polygon points="60,14 106,39 106,99 60,124 14,99 14,39" fill="url(#heroBg1)" opacity="0.95"/>
+              </svg>
+              <defs>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f0c060"/>
+                  <stop offset="100%" stop-color="#9a7020"/>
+                </linearGradient>
+                <linearGradient id="heroBg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2a1500"/>
+                  <stop offset="100%" stop-color="#1a0a00"/>
+                </linearGradient>
+                <linearGradient id="heroBg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#001a10"/>
+                  <stop offset="100%" stop-color="#000d08"/>
+                </linearGradient>
+                <linearGradient id="heroBg3" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1a0010"/>
+                  <stop offset="100%" stop-color="#0d0008"/>
+                </linearGradient>
+              </defs>
+              <div class="avatar-inner gold" style="background: linear-gradient(135deg, #3a1a00 0%, #1a0d00 100%);">
+                <span class="hero-initial">VB</span>
+              </div>
+            </div>
+          </div>
+          <div class="winner-info">
+            <span class="winner-role">Підтримка 4</span>
+            <h3 class="winner-name">Венджфул Спіріт</h3>
+            <div class="winner-wr-bar">
+              <div class="wr-fill" style="--wr: 56.2%; --clr: #f0c060;"></div>
+            </div>
+            <div class="winner-wr-label"><span class="wr-pct accent-gold">56.2%</span> Перемог</div>
+          </div>
+          <div class="winner-tags">
+            <span class="tag gold">Буфи</span>
+            <span class="tag gold">Мобільність</span>
+          </div>
+        </div>
+ 
+        <!-- 3rd place -->
+        <div class="winner-card rank-3" data-rank="3">
+          <div class="winner-rank-label">#3</div>
+          <div class="winner-avatar">
+            <div class="avatar-hex">
+              <svg viewBox="0 0 120 138" class="hex-svg">
+                <polygon points="60,4 116,34 116,104 60,134 4,104 4,34" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+                <polygon points="60,14 106,39 106,99 60,124 14,99 14,39" fill="url(#heroBg3)" opacity="0.9"/>
+              </svg>
+              <div class="avatar-inner" style="background: linear-gradient(135deg, #1f0a1a 0%, #0d0510 100%);">
+                <span class="hero-initial">MK</span>
+              </div>
+            </div>
+          </div>
+          <div class="winner-info">
+            <span class="winner-role">Мідлейнер</span>
+            <h3 class="winner-name">Монкі Кінг</h3>
+            <div class="winner-wr-bar">
+              <div class="wr-fill" style="--wr: 53.9%; --clr: #c84b4b;"></div>
+            </div>
+            <div class="winner-wr-label"><span class="wr-pct accent-dire">53.9%</span> Перемог</div>
+          </div>
+          <div class="winner-tags">
+            <span class="tag dire">Спліт-пуш</span>
+            <span class="tag dire">Дуель</span>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </section>
+ 
+  <!-- TIER LIST -->
+  <section id="tier-list" class="tierlist-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <h2 class="section-title">ТІР-ЛІСТ <span class="accent-gold">ПАТЧУ 7.41</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-sub">Класифікація героїв на основі відсотку перемог, популярності та ефективності у поточній меті</p>
+ 
+      <!-- S TIER -->
+      <div class="tier-block" data-tier="S">
+        <div class="tier-label s-tier">
+          <span class="tier-letter">S</span>
+          <span class="tier-desc">Вищий рівень</span>
+        </div>
+        <div class="tier-heroes">
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #2a1800, #150c00);">
+              <span>VS</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Венджфул Спіріт</span>
+              <span class="hcard-role">Підтримка</span>
+              <div class="hcard-wr s">56.2%</div>
+            </div>
+            <div class="hcard-tag">БАФ</div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #001a28, #000d14);">
+              <span>PH</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Фантом Ассасін</span>
+              <span class="hcard-role">Керрі</span>
+              <div class="hcard-wr s">55.8%</div>
+            </div>
+            <div class="hcard-tag">БАФ</div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a001a, #0d000d);">
+              <span>LS</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Ліфесталкер</span>
+              <span class="hcard-role">Керрі / Підт.</span>
+              <div class="hcard-wr s">54.7%</div>
+            </div>
+            <div class="hcard-tag">БАФ</div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a1a00, #0d0d00);">
+              <span>MK</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Монкі Кінг</span>
+              <span class="hcard-role">Мідлейн</span>
+              <div class="hcard-wr s">53.9%</div>
+            </div>
+            <div class="hcard-tag">МЕТА</div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #001a10, #000d08);">
+              <span>DP</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Дет Профет</span>
+              <span class="hcard-role">Офлейн</span>
+              <div class="hcard-wr s">53.5%</div>
+            </div>
+            <div class="hcard-tag">БАФ</div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- A TIER -->
+      <div class="tier-block" data-tier="A">
+        <div class="tier-label a-tier">
+          <span class="tier-letter">A</span>
+          <span class="tier-desc">Сильний рівень</span>
+        </div>
+        <div class="tier-heroes">
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a0a28, #0d0514);">
+              <span>AM</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Анті-Маг</span>
+              <span class="hcard-role">Керрі</span>
+              <div class="hcard-wr a">52.9%</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #28180a, #140c05);">
+              <span>LN</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Лайна</span>
+              <span class="hcard-role">Підтримка 5</span>
+              <div class="hcard-wr a">52.6%</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #0a1a28, #050d14);">
+              <span>SB</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Спіритбрейкер</span>
+              <span class="hcard-role">Підтримка 4</span>
+              <div class="hcard-wr a">52.3%</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #001828, #000c14);">
+              <span>PD</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Фантом Лансер</span>
+              <span class="hcard-role">Керрі</span>
+              <div class="hcard-wr a">51.8%</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #28001a, #14000d);">
+              <span>BA</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Баратрум</span>
+              <span class="hcard-role">Офлейн</span>
+              <div class="hcard-wr a">51.5%</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a2800, #0d1400);">
+              <span>CM</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Крісталь Мейден</span>
+              <span class="hcard-role">Підтримка 5</span>
+              <div class="hcard-wr a">51.2%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- B TIER -->
+      <div class="tier-block" data-tier="B">
+        <div class="tier-label b-tier">
+          <span class="tier-letter">B</span>
+          <span class="tier-desc">Середній рівень</span>
+        </div>
+        <div class="tier-heroes">
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #1a1428, #0d0a14);">
+              <span>SK</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Саджа Хан</span>
+              <div class="hcard-wr b">50.9%</div>
+            </div>
+          </div>
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #281400, #140a00);">
+              <span>JG</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Джаггернаут</span>
+              <div class="hcard-wr b">50.7%</div>
+            </div>
+          </div>
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #002814, #00140a);">
+              <span>TK</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Тінкер</span>
+              <div class="hcard-wr b">50.4%</div>
+            </div>
+          </div>
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #200028, #100014);">
+              <span>OD</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Аутраж Деструктор</span>
+              <div class="hcard-wr b">50.1%</div>
+            </div>
+          </div>
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #28201a, #14100d);">
+              <span>BM</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Бейнмор</span>
+              <div class="hcard-wr b">49.8%</div>
+            </div>
+          </div>
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #001428, #000a14);">
+              <span>SL</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Сайленсер</span>
+              <div class="hcard-wr b">49.5%</div>
+            </div>
+          </div>
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #281a00, #140d00);">
+              <span>WR</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Віндраннер</span>
+              <div class="hcard-wr b">49.2%</div>
+            </div>
+          </div>
+          <div class="hero-card small">
+            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #141428, #0a0a14);">
+              <span>PG</span>
+            </div>
+            <div class="hcard-body">
+              <span class="hcard-name">Пагнія</span>
+              <div class="hcard-wr b">49.0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- KEY CHANGES -->
+  <section id="changes" class="changes-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <h2 class="section-title">КЛЮЧОВІ <span class="accent-gold">ЗМІНИ</span> ПАТЧУ</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-sub">Найважливіші оновлення механік та предметів, що сформували поточну мету</p>
+ 
+      <div class="changes-grid">
+ 
+        <div class="change-card buff">
+          <div class="change-icon">⬆</div>
+          <div class="change-type">ПІДСИЛЕННЯ</div>
+          <h3 class="change-title">Предмети підтримки</h3>
+          <ul class="change-list">
+            <li><span class="item-name">Glimmer Cape</span> — кулдаун зменшено на 2с</li>
+            <li><span class="item-name">Force Staff</span> — відновлення мани збільшено на 1</li>
+            <li><span class="item-name">Tranquil Boots</span> — бонус HP реген +3</li>
+            <li><span class="item-name">Solar Crest</span> — броня -1 додатково</li>
+          </ul>
+        </div>
+ 
+        <div class="change-card nerf">
+          <div class="change-icon">⬇</div>
+          <div class="change-type">ПОСЛАБЛЕННЯ</div>
+          <h3 class="change-title">Лісові герої</h3>
+          <ul class="change-list">
+            <li><span class="item-name">Lycan</span> — базова броня -1</li>
+            <li><span class="item-name">Enigma</span> — JFTP радіус -30</li>
+            <li><span class="item-name">Chen</span> — швидкість крипів -5%</li>
+            <li><span class="item-name">Doom</span> — час дії ульти -2с</li>
+          </ul>
+        </div>
+ 
+        <div class="change-card mechanic">
+          <div class="change-icon">⚙</div>
+          <div class="change-type">МЕХАНІКИ</div>
+          <h3 class="change-title">Глобальні правила</h3>
+          <ul class="change-list">
+            <li>Нейтральні крипи — спавн вила <span class="accent-gold">7:00</span></li>
+            <li>Голем Рошана тепер дає +25 золота</li>
+            <li>Куртер спавн змінено до <span class="accent-gold">8 хв</span></li>
+            <li>XP у ранній грі +5% для позицій 1–2</li>
+          </ul>
+        </div>
+ 
+        <div class="change-card item">
+          <div class="change-icon">◈</div>
+          <div class="change-type">НОВІ ПРЕДМЕТИ</div>
+          <h3 class="change-title">Оновлення магазину</h3>
+          <ul class="change-list">
+            <li><span class="item-name">Reaver's Axe</span> — новий ранній предмет</li>
+            <li><span class="item-name">Echo Sabre</span> — ціна -50 золота</li>
+            <li><span class="item-name">Manta Style</span> — IAS збільшено</li>
+            <li><span class="item-name">Black King Bar</span> — тривалість +1с (перший)</li>
+          </ul>
+        </div>
+ 
+      </div>
+    </div>
+  </section>
+ 
+  <!-- STATS OVERVIEW -->
+  <section id="stats" class="stats-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <h2 class="section-title">ЗАГАЛЬНА <span class="accent-gold">СТАТИСТИКА</span></h2>
+        <div class="section-line"></div>
+      </div>
+ 
+      <div class="stats-overview-grid">
+        <div class="stat-big-card">
+          <div class="stat-icon">⚔</div>
+          <div class="stat-big-num">52.4%</div>
+          <div class="stat-big-label">Середній WR Radiant</div>
+          <div class="stat-bar-row">
+            <div class="stat-bar-fill radiant-bar" style="--w: 52.4%"></div>
+            <div class="stat-bar-fill dire-bar" style="--w: 47.6%"></div>
+          </div>
+          <div class="stat-bar-labels">
+            <span class="radiant-text">Radiant 52.4%</span>
+            <span class="dire-text">Dire 47.6%</span>
+          </div>
+        </div>
+ 
+        <div class="stat-mini-grid">
+          <div class="stat-mini-card">
+            <span class="stat-mini-icon">⏱</span>
+            <span class="stat-mini-val">34.2</span>
+            <span class="stat-mini-lbl">Середня тривалість (хв)</span>
+          </div>
+          <div class="stat-mini-card">
+            <span class="stat-mini-icon">🏆</span>
+            <span class="stat-mini-val">38.7</span>
+            <span class="stat-mini-lbl">Середні вбивства/матч</span>
+          </div>
+          <div class="stat-mini-card">
+            <span class="stat-mini-icon">⚡</span>
+            <span class="stat-mini-val">89.3%</span>
+            <span class="stat-mini-lbl">Пік рейтингових ігор</span>
+          </div>
+          <div class="stat-mini-card">
+            <span class="stat-mini-icon">🎯</span>
+            <span class="stat-mini-val">4.1</span>
+            <span class="stat-mini-lbl">Середній ФПМ керрі</span>
+          </div>
+        </div>
+ 
+        <div class="role-distribution">
+          <h3 class="rdist-title">Популярність ролей</h3>
+          <div class="rdist-list">
+            <div class="rdist-row">
+              <span class="rdist-role">Керрі</span>
+              <div class="rdist-bar-track">
+                <div class="rdist-bar" style="--w: 71%; --c: #c8a84b;"></div>
+              </div>
+              <span class="rdist-pct">71%</span>
+            </div>
+            <div class="rdist-row">
+              <span class="rdist-role">Мідлейн</span>
+              <div class="rdist-bar-track">
+                <div class="rdist-bar" style="--w: 67%; --c: #c84b4b;"></div>
+              </div>
+              <span class="rdist-pct">67%</span>
+            </div>
+            <div class="rdist-row">
+              <span class="rdist-role">Офлейн</span>
+              <div class="rdist-bar-track">
+                <div class="rdist-bar" style="--w: 59%; --c: #4bc8a8;"></div>
+              </div>
+              <span class="rdist-pct">59%</span>
+            </div>
+            <div class="rdist-row">
+              <span class="rdist-role">Підтримка 4</span>
+              <div class="rdist-bar-track">
+                <div class="rdist-bar" style="--w: 54%; --c: #4b8bc8;"></div>
+              </div>
+              <span class="rdist-pct">54%</span>
+            </div>
+            <div class="rdist-row">
+              <span class="rdist-role">Підтримка 5</span>
+              <div class="rdist-bar-track">
+                <div class="rdist-bar" style="--w: 48%; --c: #a84bc8;"></div>
+              </div>
+              <span class="rdist-pct">48%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-hex-row">
+      <span class="fhex">⬡</span><span class="fhex">⬡</span><span class="fhex">⬡</span><span class="fhex">⬡</span><span class="fhex">⬡</span>
+    </div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">⬡</span>
+        <span class="footer-name">DOTA 2 МЕТА 7.41</span>
+      </div>
+      <p class="footer-desc">
+        Аналітичний ресурс на основі даних <span class="accent-gold">Dotabuff</span>, <span class="accent-gold">Stratz</span> та офіційних нотаток до патчу.<br/>
+        Усі права на Dota 2 належать <span class="accent-gold">Valve Corporation</span>.
+      </p>
+      <div class="footer-links">
+        <a href="https://dotabuff.com" target="_blank">Dotabuff</a>
+        <a href="https://stratz.com" target="_blank">Stratz</a>
+        <a href="https://dota2.com" target="_blank">Dota 2</a>
+      </div>
+      <p class="footer-copy">© 2024 Навчальний проект | Зроблено для коледжу</p>
+    </div>
+  </footer>
+ 
 </body>
 </html>
+ 
