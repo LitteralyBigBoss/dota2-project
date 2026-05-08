@@ -1,4 +1,3 @@
-
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
@@ -35,7 +34,7 @@
   .bg-pattern {
     position: fixed;
     inset: 0;
-    background:
+    background: 
       radial-gradient(ellipse at 20% 20%, rgba(107,63,160,0.15) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 80%, rgba(200,168,75,0.08) 0%, transparent 50%),
       radial-gradient(ellipse at 50% 50%, rgba(26,13,46,0.9) 0%, transparent 100%);
@@ -55,7 +54,6 @@
 
   .content { position: relative; z-index: 1; }
 
-  /* NAV */
   nav {
     display: flex;
     align-items: center;
@@ -124,7 +122,6 @@
     letter-spacing: 0.1em;
   }
 
-  /* HERO SECTION */
   .hero {
     padding: 5rem 2rem 4rem;
     text-align: center;
@@ -193,34 +190,6 @@
     font-weight: 400;
   }
 
-  .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 2.5rem;
-  }
-
-  .hero-stat {
-    text-align: center;
-  }
-
-  .hero-stat .num {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--gold);
-    display: block;
-  }
-
-  .hero-stat .lbl {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  /* SEARCH */
   .search-wrap {
     max-width: 500px;
     margin: 0 auto 1rem;
@@ -255,7 +224,6 @@
     pointer-events: none;
   }
 
-  /* SECTION */
   section {
     max-width: 1100px;
     margin: 0 auto;
@@ -298,7 +266,6 @@
     letter-spacing: 0.02em;
   }
 
-  /* TIER FILTER */
   .tier-filters {
     display: flex;
     gap: 8px;
@@ -326,7 +293,6 @@
   .tier-btn:hover { filter: brightness(1.3); }
   .tier-btn.active { filter: brightness(1.4); box-shadow: 0 0 12px rgba(200,168,75,0.2); }
 
-  /* HERO GRID */
   .hero-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -350,20 +316,6 @@
     box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px rgba(200,168,75,0.08);
   }
 
-  .hero-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    transition: opacity 0.2s;
-    opacity: 0;
-  }
-
-  .hero-card:hover::before { opacity: 1; }
-  .hero-card.s-tier::before { background: linear-gradient(90deg, transparent, #E8A030, transparent); }
-  .hero-card.a-tier::before { background: linear-gradient(90deg, transparent, #B060E0, transparent); }
-  .hero-card.b-tier::before { background: linear-gradient(90deg, transparent, #4090D0, transparent); }
-
   .card-top {
     height: 90px;
     display: flex;
@@ -372,13 +324,6 @@
     font-size: 3rem;
     position: relative;
     overflow: hidden;
-  }
-
-  .card-top::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 50%, var(--bg-card) 100%);
   }
 
   .tier-badge {
@@ -444,14 +389,12 @@
   }
 
   .stat-value.up { color: var(--green-stat); }
-  .stat-value.neutral { color: var(--text-primary); }
 
   .trend-arrow {
     font-size: 10px;
     margin-left: 2px;
   }
 
-  /* MECHANICS GRID */
   .mechanics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -466,8 +409,6 @@
     backdrop-filter: blur(8px);
     transition: border-color 0.2s;
   }
-
-  .mechanic-card:hover { border-color: rgba(200,168,75,0.3); }
 
   .mechanic-icon {
     width: 44px;
@@ -495,9 +436,7 @@
     margin-bottom: 12px;
   }
 
-  .change-list {
-    list-style: none;
-  }
+  .change-list { list-style: none; }
 
   .change-list li {
     font-size: 12px;
@@ -509,22 +448,18 @@
     border-bottom: 1px solid rgba(255,255,255,0.04);
   }
 
-  .change-list li:last-child { border-bottom: none; }
-
   .change-tag {
     font-size: 10px;
     font-weight: 700;
     padding: 1px 6px;
     border-radius: 2px;
     white-space: nowrap;
-    flex-shrink: 0;
   }
 
   .change-tag.buff { background: rgba(80,200,120,0.15); color: #50C878; }
   .change-tag.nerf { background: rgba(224,80,80,0.15); color: #E05050; }
   .change-tag.new { background: rgba(200,168,75,0.15); color: var(--gold); }
 
-  /* ITEMS SECTION */
   .items-table {
     width: 100%;
     border-collapse: collapse;
@@ -557,12 +492,6 @@
     font-weight: 600;
   }
 
-  .item-emoji { margin-right: 8px; }
-
-  .change-positive { color: var(--green-stat); font-weight: 700; }
-  .change-negative { color: var(--red-stat); font-weight: 700; }
-
-  /* FOOTER */
   footer {
     text-align: center;
     padding: 2rem;
@@ -572,335 +501,187 @@
     letter-spacing: 0.05em;
   }
 
-  footer span { color: var(--gold-dim); }
-
-  /* HIDDEN */
-  .hero-card.hidden { display: none; }
+  .hidden { display: none !important; }
 </style>
-
-<h2 class="sr-only">Dota 2 Patch 7.41 Meta Analysis — Hero tier list, key mechanics changes, and item updates</h2>
 
 <div class="dota-root">
   <div class="bg-pattern"></div>
   <div class="hex-bg"></div>
   <div class="content">
 
-    <!-- NAV -->
     <nav>
       <a class="nav-logo" href="#">
         <div class="logo-eye">👁</div>
         DOTASTATE
       </a>
       <ul class="nav-links">
-        <li><a href="#patch-notes" class="active">Patch Notes</a></li>
-        <li><a href="#tier-list">Hero Tier List</a></li>
-        <li><a href="#mechanics">Key Mechanics</a></li>
-        <li><a href="#items">Item Changes</a></li>
+        <li><a href="#patch-notes" class="active">Meta Summary</a></li>
+        <li><a href="#tier-list">Hero Tiers</a></li>
+        <li><a href="#mechanics">Mechanics</a></li>
+        <li><a href="#items">Items</a></li>
         <li><span class="nav-badge">7.41</span></li>
       </ul>
     </nav>
 
-    <!-- HERO SECTION -->
     <section class="hero" id="patch-notes">
       <div class="patch-badge">
         <div class="patch-dot"></div>
-        Patch 7.41 — Live Now
+        Update 7.41 — Live Status
       </div>
-      <h1>The <span>Meta Has Shifted.</span><br>Again.</h1>
+      <h1>Dominating the <span>New Meta.</span></h1>
       <div class="hero-divider"></div>
-      <p>Patch 7.41 brings sweeping changes to the Dota 2 landscape — map geometry overhauls, neutral creep reworks, and a profound rebalancing of carries vs. utility supports. Aggression is rewarded earlier than ever.</p>
+      <p>Analyze high-tier matches and win rates from the Divine+ bracket. Strategic insight into hero performance and systemic changes.</p>
 
       <div class="search-wrap">
-        <input class="search-input" id="heroSearch" type="search" placeholder="Search heroes, items, abilities..." autocomplete="off" />
+        <input class="search-input" id="heroSearch" type="search" placeholder="Search heroes, items, mechanics..." autocomplete="off" aria-label="Search" />
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat"><span class="num">47</span><span class="lbl">Heroes Changed</span></div>
-        <div class="hero-stat"><span class="num">23</span><span class="lbl">Items Reworked</span></div>
-        <div class="hero-stat"><span class="num">6</span><span class="lbl">Map Changes</span></div>
-        <div class="hero-stat"><span class="num">3</span><span class="lbl">New Neutrals</span></div>
       </div>
     </section>
 
-    <!-- TIER LIST -->
     <section id="tier-list">
       <div class="section-header">
-        <span class="section-label">Meta Analysis</span>
+        <span class="section-label">Performance Radar</span>
         <div class="section-line"></div>
       </div>
       <h2 class="section-title">Hero Tier List</h2>
-      <p class="section-sub">Win rates and pick rates sourced from 7.41 high-MMR bracket data (Divine+).</p>
+      <p class="section-sub">Source: Divine & Immortal Ranked Matchmaking Data.</p>
 
       <div class="tier-filters">
-        <button class="tier-btn all active" data-filter="all">All Tiers</button>
+        <button class="tier-btn all active" data-filter="all">All Rankings</button>
         <button class="tier-btn s" data-filter="s">S-Tier</button>
         <button class="tier-btn a" data-filter="a">A-Tier</button>
         <button class="tier-btn b" data-filter="b">B-Tier</button>
       </div>
 
       <div class="hero-grid" id="heroGrid">
+        <!-- S-TIER -->
+        <article class="hero-card s-tier" data-tier="s" data-name="primal beast">
+          <div class="card-top" style="background: linear-gradient(135deg,#3a1010,#5a1010);">🌋<span class="tier-badge s">S</span></div>
+          <div class="card-body">
+            <div class="card-name">Primal Beast</div>
+            <div class="card-role">Offlane · Strength</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">54.8%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">12.4%</span></div>
+            </div>
+          </div>
+        </article>
 
-        <article class="hero-card s-tier" data-tier="s" data-name="morphling">
-          <div class="card-top" style="background: linear-gradient(135deg,#0a1a3a,#0d2b4a);">💧<span class="tier-badge s">S</span></div>
+        <article class="hero-card s-tier" data-tier="s" data-name="hoodwink">
+          <div class="card-top" style="background: linear-gradient(135deg,#1a2a0a,#2a3a10);">🐿️<span class="tier-badge s">S</span></div>
+          <div class="card-body">
+            <div class="card-name">Hoodwink</div>
+            <div class="card-role">Support · Agility</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">53.9%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">22.1%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- A-TIER -->
+        <article class="hero-card a-tier" data-tier="a" data-name="leshrac">
+          <div class="card-top" style="background: linear-gradient(135deg,#0a1a3a,#0d2b4a);">🦌<span class="tier-badge a">A</span></div>
+          <div class="card-body">
+            <div class="card-name">Leshrac</div>
+            <div class="card-role">Mid · Intelligence</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">52.4%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">10.8%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card a-tier" data-tier="a" data-name="morphling">
+          <div class="card-top" style="background: linear-gradient(135deg,#001a1a,#002a28);">💧<span class="tier-badge a">A</span></div>
           <div class="card-body">
             <div class="card-name">Morphling</div>
             <div class="card-role">Carry · Agility</div>
             <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">56.4%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">18.2%</span></div>
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value">51.2%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">15.3%</span></div>
             </div>
           </div>
         </article>
 
-        <article class="hero-card s-tier" data-tier="s" data-name="windranger">
-          <div class="card-top" style="background: linear-gradient(135deg,#1a2a0a,#2a3a10);">🏹<span class="tier-badge s">S</span></div>
+        <!-- B-TIER -->
+        <article class="hero-card b-tier" data-tier="b" data-name="phantom assassin">
+          <div class="card-top" style="background: linear-gradient(135deg,#1a0a2a,#2a0d3a);">🗡️<span class="tier-badge b">B</span></div>
           <div class="card-body">
-            <div class="card-name">Windranger</div>
-            <div class="card-role">Mid · Universal</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">55.8%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">21.7%</span></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="hero-card s-tier" data-tier="s" data-name="beastmaster">
-          <div class="card-top" style="background: linear-gradient(135deg,#2a1500,#3a1f00);">🪓<span class="tier-badge s">S</span></div>
-          <div class="card-body">
-            <div class="card-name">Beastmaster</div>
-            <div class="card-role">Offlane · Strength</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">54.9%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">16.3%</span></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="hero-card s-tier" data-tier="s" data-name="shadow demon">
-          <div class="card-top" style="background: linear-gradient(135deg,#1a0a2a,#2a0d3a);">👹<span class="tier-badge s">S</span></div>
-          <div class="card-body">
-            <div class="card-name">Shadow Demon</div>
-            <div class="card-role">Support · Intelligence</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">54.1%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">14.9%</span></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="hero-card a-tier" data-tier="a" data-name="mars">
-          <div class="card-top" style="background: linear-gradient(135deg,#2a0808,#3a1010);">⚔️<span class="tier-badge a">A</span></div>
-          <div class="card-body">
-            <div class="card-name">Mars</div>
-            <div class="card-role">Offlane · Strength</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">53.6%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">22.1%</span></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="hero-card a-tier" data-tier="a" data-name="troll warlord">
-          <div class="card-top" style="background: linear-gradient(135deg,#1a1a00,#2a2800);">🪃<span class="tier-badge a">A</span></div>
-          <div class="card-body">
-            <div class="card-name">Troll Warlord</div>
+            <div class="card-name">Phantom Assassin</div>
             <div class="card-role">Carry · Agility</div>
             <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">53.0%<span class="trend-arrow">▲</span></span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">19.8%</span></div>
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value">48.6%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value">19.2%</span></div>
             </div>
           </div>
         </article>
-
-        <article class="hero-card a-tier" data-tier="a" data-name="vengeful spirit">
-          <div class="card-top" style="background: linear-gradient(135deg,#0a0a2a,#10103a);">🌀<span class="tier-badge a">A</span></div>
-          <div class="card-body">
-            <div class="card-name">Vengeful Spirit</div>
-            <div class="card-role">Support · Agility</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value neutral">52.4%</span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">25.3%</span></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="hero-card b-tier" data-tier="b" data-name="medusa">
-          <div class="card-top" style="background: linear-gradient(135deg,#001a1a,#002a28);">🐍<span class="tier-badge b">B</span></div>
-          <div class="card-body">
-            <div class="card-name">Medusa</div>
-            <div class="card-role">Carry · Agility</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value neutral">50.7%</span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">17.4%</span></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="hero-card b-tier" data-tier="b" data-name="invoker">
-          <div class="card-top" style="background: linear-gradient(135deg,#0a1a2a,#0f2030);">🔮<span class="tier-badge b">B</span></div>
-          <div class="card-body">
-            <div class="card-name">Invoker</div>
-            <div class="card-role">Mid · Universal</div>
-            <div class="card-stats">
-              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value neutral">49.9%</span></div>
-              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">28.6%</span></div>
-            </div>
-          </div>
-        </article>
-
       </div>
     </section>
 
-    <!-- KEY MECHANICS -->
     <section id="mechanics">
       <div class="section-header">
-        <span class="section-label">Gameplay Changes</span>
+        <span class="section-label">Systems Update</span>
         <div class="section-line"></div>
       </div>
-      <h2 class="section-title">Key Mechanics — Patch 7.41</h2>
-      <p class="section-sub">Structural changes affecting every game from draft to GG.</p>
-
+      <h2 class="section-title">Core Gameplay Changes</h2>
       <div class="mechanics-grid">
-
         <article class="mechanic-card">
           <div class="mechanic-icon" style="background: rgba(64,144,80,0.15);">🗺️</div>
-          <h3 class="mechanic-title">Map Geometry Overhaul</h3>
-          <p class="mechanic-desc">Both side lanes received cliff and tree adjustments that open new high-ground ward spots and alter smoke paths significantly.</p>
+          <h3 class="mechanic-title">Map Dynamics</h3>
+          <p class="mechanic-desc">High-ground vision and pathing adjustments for improved tactical rotations.</p>
           <ul class="change-list">
-            <li><span class="change-tag new">NEW</span>Secondary rune spawns added to river</li>
-            <li><span class="change-tag buff">BUFF</span>Radiant jungle camp stacking improved</li>
-            <li><span class="change-tag nerf">NERF</span>Dire offlane safe zone reduced</li>
+            <li><span class="change-tag buff">BUFF</span>Radiant Jungle Stacking</li>
+            <li><span class="change-tag nerf">NERF</span>Dire Offlane Pulling Range</li>
           </ul>
         </article>
 
         <article class="mechanic-card">
           <div class="mechanic-icon" style="background: rgba(200,168,75,0.12);">⚡</div>
-          <h3 class="mechanic-title">Neutral Creep Rework</h3>
-          <p class="mechanic-desc">Neutral item drop rates adjusted at all tiers. Tier 1 items drop 25% more frequently, creating stronger early snowball potential.</p>
+          <h3 class="mechanic-title">Neutral Economy</h3>
+          <p class="mechanic-desc">Drop rates for Tier 1 items adjusted to boost early game momentum.</p>
           <ul class="change-list">
-            <li><span class="change-tag buff">BUFF</span>Tier 1 drop rate: 14% → 18%</li>
-            <li><span class="change-tag nerf">NERF</span>Tier 3 drop rate: 10% → 8%</li>
-            <li><span class="change-tag new">NEW</span>3 new Tier 2 neutral items added</li>
+            <li><span class="change-tag buff">BUFF</span>Tier 1 Drop Rate +4%</li>
+            <li><span class="change-tag new">NEW</span>Tier 2 Item Pool Expansion</li>
           </ul>
         </article>
-
-        <article class="mechanic-card">
-          <div class="mechanic-icon" style="background: rgba(176,96,224,0.15);">🏰</div>
-          <h3 class="mechanic-title">Tower Changes</h3>
-          <p class="mechanic-desc">Towers across all tiers received armor and damage adjustments to reduce early tower diving and extend the laning phase.</p>
-          <ul class="change-list">
-            <li><span class="change-tag buff">BUFF</span>T1 tower armor: 5 → 8</li>
-            <li><span class="change-tag nerf">NERF</span>T2 tower bounty gold reduced 12%</li>
-            <li><span class="change-tag buff">BUFF</span>Outpost vision range extended</li>
-          </ul>
-        </article>
-
-        <article class="mechanic-card">
-          <div class="mechanic-icon" style="background: rgba(224,80,80,0.12);">🐉</div>
-          <h3 class="mechanic-title">Roshan Adjustments</h3>
-          <p class="mechanic-desc">Roshan's pit location slightly shifted toward the river. Spawn timers standardized. Cheese drop rate on third kill increased.</p>
-          <ul class="change-list">
-            <li><span class="change-tag new">NEW</span>Roshan pit repositioned</li>
-            <li><span class="change-tag buff">BUFF</span>Cheese drop: 50% → 65%</li>
-            <li><span class="change-tag nerf">NERF</span>Base HP: 6500 → 6200</li>
-          </ul>
-        </article>
-
-        <article class="mechanic-card">
-          <div class="mechanic-icon" style="background: rgba(80,200,120,0.12);">🌿</div>
-          <h3 class="mechanic-title">Bounty Rune Economy</h3>
-          <p class="mechanic-desc">Bounty rune gold scaling adjusted per minute. Early game economy shifts favor aggressive trilane setups and invading jungles.</p>
-          <ul class="change-list">
-            <li><span class="change-tag buff">BUFF</span>Min 0–5 bounty gold +15</li>
-            <li><span class="change-tag nerf">NERF</span>Late-game bounty scaling nerfed</li>
-            <li><span class="change-tag buff">BUFF</span>Shared gold radius increased</li>
-          </ul>
-        </article>
-
-        <article class="mechanic-card">
-          <div class="mechanic-icon" style="background: rgba(64,144,208,0.12);">🎯</div>
-          <h3 class="mechanic-title">Spell Immunity Changes</h3>
-          <p class="mechanic-desc">Several abilities that previously pierced BKB no longer do so. This heavily buffs carry-oriented metas and reduces support dominance.</p>
-          <ul class="change-list">
-            <li><span class="change-tag nerf">NERF</span>6 abilities removed from BKB pierce</li>
-            <li><span class="change-tag buff">BUFF</span>BKB duration: 5s (lvl 1) restored</li>
-            <li><span class="change-tag new">NEW</span>Spell lifestealer passive reworked</li>
-          </ul>
-        </article>
-
       </div>
     </section>
 
-    <!-- ITEM CHANGES -->
     <section id="items">
       <div class="section-header">
-        <span class="section-label">Item Balance</span>
+        <span class="section-label">Inventory Balance</span>
         <div class="section-line"></div>
       </div>
-      <h2 class="section-title">Notable Item Changes</h2>
-      <p class="section-sub">High-impact item adjustments shaping the current item build meta.</p>
-
+      <h2 class="section-title">Key Item Adjustments</h2>
       <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; overflow: hidden; backdrop-filter: blur(8px);">
         <table class="items-table">
           <thead>
             <tr>
               <th>Item</th>
               <th>Category</th>
-              <th>Change</th>
+              <th>Status</th>
               <th>Impact</th>
-              <th>Cost Δ</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><span class="item-emoji">⚡</span><span class="item-name">Aghanim's Scepter</span></td>
+              <td><span class="item-name">Aghanim's Scepter</span></td>
               <td>Upgrade</td>
               <td><span class="change-tag buff">BUFF</span></td>
-              <td>Ability upgrades improved on 8 heroes</td>
-              <td class="change-negative">+150g</td>
+              <td>Enhanced upgrades for 8 heroes</td>
             </tr>
             <tr>
-              <td><span class="item-emoji">🌀</span><span class="item-name">Eul's Scepter</span></td>
-              <td>Utility</td>
-              <td><span class="change-tag buff">BUFF</span></td>
-              <td>Cast range +50, duration unchanged</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td><span class="item-emoji">🛡️</span><span class="item-name">Pipe of Insight</span></td>
-              <td>Armor</td>
-              <td><span class="change-tag nerf">NERF</span></td>
-              <td>Barrier HP 450 → 375</td>
-              <td class="change-positive">-100g</td>
-            </tr>
-            <tr>
-              <td><span class="item-emoji">🗡️</span><span class="item-name">Desolator</span></td>
+              <td><span class="item-name">Maelstrom</span></td>
               <td>Damage</td>
               <td><span class="change-tag nerf">NERF</span></td>
-              <td>Corruption armor reduction: -6 → -5</td>
-              <td>—</td>
+              <td>Chain lightning damage reduced</td>
             </tr>
             <tr>
-              <td><span class="item-emoji">✨</span><span class="item-name">Gleipnir</span></td>
-              <td>CC</td>
+              <td><span class="item-name">Solar Crest</span></td>
+              <td>Support</td>
               <td><span class="change-tag buff">BUFF</span></td>
-              <td>Root duration 2.0 → 2.5s</td>
-              <td class="change-negative">+200g</td>
-            </tr>
-            <tr>
-              <td><span class="item-emoji">🔥</span><span class="item-name">Radiance</span></td>
-              <td>Carry</td>
-              <td><span class="change-tag buff">BUFF</span></td>
-              <td>Burn damage 60 → 70 DPS</td>
-              <td class="change-negative">+150g</td>
-            </tr>
-            <tr>
-              <td><span class="item-emoji">💚</span><span class="item-name">Wraith Pact</span></td>
-              <td>Utility</td>
-              <td><span class="change-tag nerf">NERF</span></td>
-              <td>Totem HP 750 → 550, aura radius -50</td>
-              <td class="change-positive">-300g</td>
+              <td>Mana cost removed</td>
             </tr>
           </tbody>
         </table>
@@ -908,7 +689,7 @@
     </section>
 
     <footer>
-      <p>DOTASTATE — Patch 7.41 Meta Analysis | <span>Data: Divine+ Bracket</span> | Not affiliated with Valve Corporation</p>
+      <p>DOTASTATE — Patch 7.41 Analytics | <span>Powered by Divine+ Bracket Data</span> | Non-official Valve resource</p>
     </footer>
 
   </div>
@@ -918,6 +699,7 @@
   const filters = document.querySelectorAll('.tier-btn');
   const cards = document.querySelectorAll('.hero-card');
   const searchInput = document.getElementById('heroSearch');
+  const navLinks = document.querySelectorAll('.nav-links a');
 
   let activeFilter = 'all';
   let searchQuery = '';
@@ -925,9 +707,10 @@
   function applyFilters() {
     cards.forEach(card => {
       const tier = card.dataset.tier;
-      const name = card.dataset.name;
+      const name = card.dataset.name.toLowerCase();
       const tierMatch = activeFilter === 'all' || tier === activeFilter;
-      const nameMatch = name.includes(searchQuery.toLowerCase());
+      const nameMatch = name.includes(searchQuery);
+      
       card.classList.toggle('hidden', !(tierMatch && nameMatch));
     });
   }
@@ -946,13 +729,15 @@
     applyFilters();
   });
 
-  document.querySelectorAll('.nav-links a').forEach(link => {
+  navLinks.forEach(link => {
     link.addEventListener('click', e => {
-      e.preventDefault();
-      const target = link.getAttribute('href');
-      document.querySelector(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
+      const targetId = link.getAttribute('href');
+      if (targetId.startsWith('#')) {
+        e.preventDefault();
+        document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
     });
   });
 </script>
