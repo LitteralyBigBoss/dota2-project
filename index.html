@@ -1,616 +1,958 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dota 2 — Мета Патчу 7.41</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-</head>
-<body>
- 
-  <!-- NOISE OVERLAY -->
-  <div class="noise-overlay"></div>
- 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-bg-grid"></div>
-    <div class="header-inner container">
-      <div class="logo">
-        <span class="logo-icon">⬡</span>
-        <div class="logo-text">
-          <span class="logo-main">DOTA 2</span>
-          <span class="logo-sub">АНАЛІТИКА МЕТИ</span>
-        </div>
-      </div>
-      <nav class="main-nav">
-        <a href="#tier-list">Тір-Ліст</a>
-        <a href="#winners">Переможці</a>
-        <a href="#changes">Зміни</a>
-        <a href="#stats">Статистика</a>
-      </nav>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --gold: #C8A84B;
+    --gold-light: #F0D080;
+    --gold-dim: #7A6530;
+    --bg-deep: #0A0810;
+    --bg-card: rgba(20,16,35,0.7);
+    --bg-glass: rgba(255,255,255,0.04);
+    --purple-deep: #1A0D2E;
+    --purple-mid: #2D1B4E;
+    --purple-accent: #6B3FA0;
+    --border-glass: rgba(200,168,75,0.18);
+    --text-primary: #EDE8D8;
+    --text-muted: #8A7FA0;
+    --s-tier: #E8A030;
+    --a-tier: #B060E0;
+    --b-tier: #4090D0;
+    --green-stat: #50C878;
+    --red-stat: #E05050;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .dota-root {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .bg-pattern {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(107,63,160,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(200,168,75,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(26,13,46,0.9) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hex-bg {
+    position: fixed;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,2 58,17 58,35 30,50 2,35 2,17' fill='none' stroke='%23C8A84B' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 52px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 64px;
+    background: rgba(10,8,16,0.9);
+    border-bottom: 1px solid var(--border-glass);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .logo-eye {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--purple-accent), var(--gold-dim));
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--gold-light); }
+
+  .nav-badge {
+    background: linear-gradient(135deg, var(--purple-accent), var(--gold-dim));
+    color: var(--gold-light);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .patch-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,168,75,0.1);
+    border: 1px solid var(--border-glass);
+    border-radius: 4px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .patch-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto 2rem;
+    font-weight: 400;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .num {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-stat .lbl {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* SEARCH */
+  .search-wrap {
+    max-width: 500px;
+    margin: 0 auto 1rem;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 6px;
+    padding: 12px 48px 12px 16px;
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    outline: none;
+    transition: border-color 0.2s;
+    backdrop-filter: blur(8px);
+  }
+
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-input:focus { border-color: var(--gold-dim); }
+
+  .search-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  /* SECTION */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-glass), transparent);
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* TIER FILTER */
+  .tier-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tier-btn {
+    padding: 6px 18px;
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .tier-btn.s { background: rgba(232,160,48,0.15); border-color: rgba(232,160,48,0.4); color: #E8A030; }
+  .tier-btn.a { background: rgba(176,96,224,0.15); border-color: rgba(176,96,224,0.4); color: #B060E0; }
+  .tier-btn.b { background: rgba(64,144,208,0.15); border-color: rgba(64,144,208,0.4); color: #4090D0; }
+  .tier-btn.all { background: var(--bg-glass); border-color: var(--border-glass); color: var(--text-muted); }
+  .tier-btn:hover { filter: brightness(1.3); }
+  .tier-btn.active { filter: brightness(1.4); box-shadow: 0 0 12px rgba(200,168,75,0.2); }
+
+  /* HERO GRID */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .hero-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(8px);
+    position: relative;
+  }
+
+  .hero-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200,168,75,0.4);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px rgba(200,168,75,0.08);
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    transition: opacity 0.2s;
+    opacity: 0;
+  }
+
+  .hero-card:hover::before { opacity: 1; }
+  .hero-card.s-tier::before { background: linear-gradient(90deg, transparent, #E8A030, transparent); }
+  .hero-card.a-tier::before { background: linear-gradient(90deg, transparent, #B060E0, transparent); }
+  .hero-card.b-tier::before { background: linear-gradient(90deg, transparent, #4090D0, transparent); }
+
+  .card-top {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-top::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, var(--bg-card) 100%);
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    z-index: 2;
+    text-transform: uppercase;
+  }
+
+  .tier-badge.s { background: rgba(232,160,48,0.25); color: #E8A030; border: 1px solid rgba(232,160,48,0.4); }
+  .tier-badge.a { background: rgba(176,96,224,0.25); color: #B060E0; border: 1px solid rgba(176,96,224,0.4); }
+  .tier-badge.b { background: rgba(64,144,208,0.25); color: #4090D0; border: 1px solid rgba(64,144,208,0.4); }
+
+  .card-body { padding: 10px 14px 14px; }
+
+  .card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .card-role {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 8px;
+  }
+
+  .stat-pill {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    padding: 5px 6px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .stat-value {
+    font-size: 14px;
+    font-weight: 700;
+    display: block;
+    margin-top: 1px;
+  }
+
+  .stat-value.up { color: var(--green-stat); }
+  .stat-value.neutral { color: var(--text-primary); }
+
+  .trend-arrow {
+    font-size: 10px;
+    margin-left: 2px;
+  }
+
+  /* MECHANICS GRID */
+  .mechanics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .mechanic-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: 10px;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.2s;
+  }
+
+  .mechanic-card:hover { border-color: rgba(200,168,75,0.3); }
+
+  .mechanic-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 1rem;
+  }
+
+  .mechanic-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .mechanic-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .change-list {
+    list-style: none;
+  }
+
+  .change-list li {
+    font-size: 12px;
+    padding: 4px 0;
+    color: var(--text-muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .change-list li:last-child { border-bottom: none; }
+
+  .change-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .change-tag.buff { background: rgba(80,200,120,0.15); color: #50C878; }
+  .change-tag.nerf { background: rgba(224,80,80,0.15); color: #E05050; }
+  .change-tag.new { background: rgba(200,168,75,0.15); color: var(--gold); }
+
+  /* ITEMS SECTION */
+  .items-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .items-table th {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-glass);
+    font-weight: 700;
+  }
+
+  .items-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .items-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .item-name {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .item-emoji { margin-right: 8px; }
+
+  .change-positive { color: var(--green-stat); font-weight: 700; }
+  .change-negative { color: var(--red-stat); font-weight: 700; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border-glass);
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  footer span { color: var(--gold-dim); }
+
+  /* HIDDEN */
+  .hero-card.hidden { display: none; }
+</style>
+
+<h2 class="sr-only">Dota 2 Patch 7.41 Meta Analysis — Hero tier list, key mechanics changes, and item updates</h2>
+
+<div class="dota-root">
+  <div class="bg-pattern"></div>
+  <div class="hex-bg"></div>
+  <div class="content">
+
+    <!-- NAV -->
+    <nav>
+      <a class="nav-logo" href="#">
+        <div class="logo-eye">👁</div>
+        DOTASTATE
+      </a>
+      <ul class="nav-links">
+        <li><a href="#patch-notes" class="active">Patch Notes</a></li>
+        <li><a href="#tier-list">Hero Tier List</a></li>
+        <li><a href="#mechanics">Key Mechanics</a></li>
+        <li><a href="#items">Item Changes</a></li>
+        <li><span class="nav-badge">7.41</span></li>
+      </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="patch-notes">
       <div class="patch-badge">
-        <span class="patch-label">ПАТЧ</span>
-        <span class="patch-num">7.41</span>
+        <div class="patch-dot"></div>
+        Patch 7.41 — Live Now
       </div>
-    </div>
-  </header>
- 
-  <!-- HERO SECTION -->
-  <section class="hero-section">
-    <div class="hero-bg">
-      <div class="radiant-glow"></div>
-      <div class="dire-glow"></div>
-      <div class="scanlines"></div>
-    </div>
-    <div class="container hero-content">
-      <div class="hero-eyebrow">
-        <span class="dot radiant"></span>
-        АКТУАЛЬНА МЕТА
-        <span class="dot dire"></span>
+      <h1>The <span>Meta Has Shifted.</span><br>Again.</h1>
+      <div class="hero-divider"></div>
+      <p>Patch 7.41 brings sweeping changes to the Dota 2 landscape — map geometry overhauls, neutral creep reworks, and a profound rebalancing of carries vs. utility supports. Aggression is rewarded earlier than ever.</p>
+
+      <div class="search-wrap">
+        <input class="search-input" id="heroSearch" type="search" placeholder="Search heroes, items, abilities..." autocomplete="off" />
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </div>
-      <h1 class="hero-title">
-        <span class="title-line-1">ПАТЧ</span>
-        <span class="title-line-2">7<span class="title-dot">.</span>41</span>
-        <span class="title-line-3">МЕТ<span class="title-a">А</span></span>
-      </h1>
-      <p class="hero-desc">
-        Повний аналіз найсильніших героїв, ключових змін балансу та стратегій
-        перемоги у поточному патчі. Дані засновані на статистиці
-        <span class="accent-gold">Dotabuff</span> та <span class="accent-gold">Stratz</span>.
-      </p>
-      <div class="hero-stats-row">
-        <div class="hstat">
-          <span class="hstat-val">124</span>
-          <span class="hstat-lbl">Герої</span>
-        </div>
-        <div class="hstat-divider"></div>
-        <div class="hstat">
-          <span class="hstat-val">15M+</span>
-          <span class="hstat-lbl">Матчів</span>
-        </div>
-        <div class="hstat-divider"></div>
-        <div class="hstat">
-          <span class="hstat-val">7.41</span>
-          <span class="hstat-lbl">Версія</span>
-        </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">47</span><span class="lbl">Heroes Changed</span></div>
+        <div class="hero-stat"><span class="num">23</span><span class="lbl">Items Reworked</span></div>
+        <div class="hero-stat"><span class="num">6</span><span class="lbl">Map Changes</span></div>
+        <div class="hero-stat"><span class="num">3</span><span class="lbl">New Neutrals</span></div>
       </div>
-    </div>
-    <div class="hero-scroll-cue">
-      <span>ПРОКРУТІТЬ ВНИЗ</span>
-      <div class="scroll-arrow">↓</div>
-    </div>
-  </section>
- 
-  <!-- TOP 3 WINNERS -->
-  <section id="winners" class="winners-section">
-    <div class="container">
+    </section>
+
+    <!-- TIER LIST -->
+    <section id="tier-list">
       <div class="section-header">
-        <div class="section-line"></div>
-        <h2 class="section-title">ТОП-3 <span class="accent-gold">ПЕРЕМОЖЦІ</span> ПАТЧУ</h2>
+        <span class="section-label">Meta Analysis</span>
         <div class="section-line"></div>
       </div>
-      <p class="section-sub">Герої з найвищим відсотком перемог у патчі 7.41 серед усіх рівнів гри</p>
- 
-      <div class="winners-grid">
- 
-        <!-- 2nd place -->
-        <div class="winner-card rank-2" data-rank="2">
-          <div class="winner-rank-label">#2</div>
-          <div class="winner-avatar">
-            <div class="avatar-hex">
-              <svg viewBox="0 0 120 138" class="hex-svg">
-                <polygon points="60,4 116,34 116,104 60,134 4,104 4,34" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
-                <polygon points="60,14 106,39 106,99 60,124 14,99 14,39" fill="url(#heroBg2)" opacity="0.9"/>
-              </svg>
-              <div class="avatar-inner" style="background: linear-gradient(135deg, #1a2a1a 0%, #0d1f2d 100%);">
-                <span class="hero-initial">LS</span>
-              </div>
-            </div>
-          </div>
-          <div class="winner-info">
-            <span class="winner-role">Підтримка / Кор</span>
-            <h3 class="winner-name">Ліфесталкер</h3>
-            <div class="winner-wr-bar">
-              <div class="wr-fill" style="--wr: 54.7%; --clr: #c8a84b;"></div>
-            </div>
-            <div class="winner-wr-label"><span class="wr-pct accent-gold">54.7%</span> Перемог</div>
-          </div>
-          <div class="winner-tags">
-            <span class="tag">Агресія</span>
-            <span class="tag">Ранній тиск</span>
-          </div>
-        </div>
- 
-        <!-- 1st place -->
-        <div class="winner-card rank-1 featured" data-rank="1">
-          <div class="crown-icon">♛</div>
-          <div class="winner-rank-label">#1</div>
-          <div class="featured-glow"></div>
-          <div class="winner-avatar">
-            <div class="avatar-hex large">
-              <svg viewBox="0 0 120 138" class="hex-svg">
-                <polygon points="60,4 116,34 116,104 60,134 4,104 4,34" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
-                <polygon points="60,14 106,39 106,99 60,124 14,99 14,39" fill="url(#heroBg1)" opacity="0.95"/>
-              </svg>
-              <defs>
-                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#f0c060"/>
-                  <stop offset="100%" stop-color="#9a7020"/>
-                </linearGradient>
-                <linearGradient id="heroBg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#2a1500"/>
-                  <stop offset="100%" stop-color="#1a0a00"/>
-                </linearGradient>
-                <linearGradient id="heroBg2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#001a10"/>
-                  <stop offset="100%" stop-color="#000d08"/>
-                </linearGradient>
-                <linearGradient id="heroBg3" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#1a0010"/>
-                  <stop offset="100%" stop-color="#0d0008"/>
-                </linearGradient>
-              </defs>
-              <div class="avatar-inner gold" style="background: linear-gradient(135deg, #3a1a00 0%, #1a0d00 100%);">
-                <span class="hero-initial">VB</span>
-              </div>
-            </div>
-          </div>
-          <div class="winner-info">
-            <span class="winner-role">Підтримка 4</span>
-            <h3 class="winner-name">Венджфул Спіріт</h3>
-            <div class="winner-wr-bar">
-              <div class="wr-fill" style="--wr: 56.2%; --clr: #f0c060;"></div>
-            </div>
-            <div class="winner-wr-label"><span class="wr-pct accent-gold">56.2%</span> Перемог</div>
-          </div>
-          <div class="winner-tags">
-            <span class="tag gold">Буфи</span>
-            <span class="tag gold">Мобільність</span>
-          </div>
-        </div>
- 
-        <!-- 3rd place -->
-        <div class="winner-card rank-3" data-rank="3">
-          <div class="winner-rank-label">#3</div>
-          <div class="winner-avatar">
-            <div class="avatar-hex">
-              <svg viewBox="0 0 120 138" class="hex-svg">
-                <polygon points="60,4 116,34 116,104 60,134 4,104 4,34" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
-                <polygon points="60,14 106,39 106,99 60,124 14,99 14,39" fill="url(#heroBg3)" opacity="0.9"/>
-              </svg>
-              <div class="avatar-inner" style="background: linear-gradient(135deg, #1f0a1a 0%, #0d0510 100%);">
-                <span class="hero-initial">MK</span>
-              </div>
-            </div>
-          </div>
-          <div class="winner-info">
-            <span class="winner-role">Мідлейнер</span>
-            <h3 class="winner-name">Монкі Кінг</h3>
-            <div class="winner-wr-bar">
-              <div class="wr-fill" style="--wr: 53.9%; --clr: #c84b4b;"></div>
-            </div>
-            <div class="winner-wr-label"><span class="wr-pct accent-dire">53.9%</span> Перемог</div>
-          </div>
-          <div class="winner-tags">
-            <span class="tag dire">Спліт-пуш</span>
-            <span class="tag dire">Дуель</span>
-          </div>
-        </div>
- 
+      <h2 class="section-title">Hero Tier List</h2>
+      <p class="section-sub">Win rates and pick rates sourced from 7.41 high-MMR bracket data (Divine+).</p>
+
+      <div class="tier-filters">
+        <button class="tier-btn all active" data-filter="all">All Tiers</button>
+        <button class="tier-btn s" data-filter="s">S-Tier</button>
+        <button class="tier-btn a" data-filter="a">A-Tier</button>
+        <button class="tier-btn b" data-filter="b">B-Tier</button>
       </div>
-    </div>
-  </section>
- 
-  <!-- TIER LIST -->
-  <section id="tier-list" class="tierlist-section">
-    <div class="container">
+
+      <div class="hero-grid" id="heroGrid">
+
+        <article class="hero-card s-tier" data-tier="s" data-name="morphling">
+          <div class="card-top" style="background: linear-gradient(135deg,#0a1a3a,#0d2b4a);">💧<span class="tier-badge s">S</span></div>
+          <div class="card-body">
+            <div class="card-name">Morphling</div>
+            <div class="card-role">Carry · Agility</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">56.4%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">18.2%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card s-tier" data-tier="s" data-name="windranger">
+          <div class="card-top" style="background: linear-gradient(135deg,#1a2a0a,#2a3a10);">🏹<span class="tier-badge s">S</span></div>
+          <div class="card-body">
+            <div class="card-name">Windranger</div>
+            <div class="card-role">Mid · Universal</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">55.8%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">21.7%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card s-tier" data-tier="s" data-name="beastmaster">
+          <div class="card-top" style="background: linear-gradient(135deg,#2a1500,#3a1f00);">🪓<span class="tier-badge s">S</span></div>
+          <div class="card-body">
+            <div class="card-name">Beastmaster</div>
+            <div class="card-role">Offlane · Strength</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">54.9%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">16.3%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card s-tier" data-tier="s" data-name="shadow demon">
+          <div class="card-top" style="background: linear-gradient(135deg,#1a0a2a,#2a0d3a);">👹<span class="tier-badge s">S</span></div>
+          <div class="card-body">
+            <div class="card-name">Shadow Demon</div>
+            <div class="card-role">Support · Intelligence</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">54.1%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">14.9%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card a-tier" data-tier="a" data-name="mars">
+          <div class="card-top" style="background: linear-gradient(135deg,#2a0808,#3a1010);">⚔️<span class="tier-badge a">A</span></div>
+          <div class="card-body">
+            <div class="card-name">Mars</div>
+            <div class="card-role">Offlane · Strength</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">53.6%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">22.1%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card a-tier" data-tier="a" data-name="troll warlord">
+          <div class="card-top" style="background: linear-gradient(135deg,#1a1a00,#2a2800);">🪃<span class="tier-badge a">A</span></div>
+          <div class="card-body">
+            <div class="card-name">Troll Warlord</div>
+            <div class="card-role">Carry · Agility</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value up">53.0%<span class="trend-arrow">▲</span></span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">19.8%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card a-tier" data-tier="a" data-name="vengeful spirit">
+          <div class="card-top" style="background: linear-gradient(135deg,#0a0a2a,#10103a);">🌀<span class="tier-badge a">A</span></div>
+          <div class="card-body">
+            <div class="card-name">Vengeful Spirit</div>
+            <div class="card-role">Support · Agility</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value neutral">52.4%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">25.3%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card b-tier" data-tier="b" data-name="medusa">
+          <div class="card-top" style="background: linear-gradient(135deg,#001a1a,#002a28);">🐍<span class="tier-badge b">B</span></div>
+          <div class="card-body">
+            <div class="card-name">Medusa</div>
+            <div class="card-role">Carry · Agility</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value neutral">50.7%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">17.4%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-card b-tier" data-tier="b" data-name="invoker">
+          <div class="card-top" style="background: linear-gradient(135deg,#0a1a2a,#0f2030);">🔮<span class="tier-badge b">B</span></div>
+          <div class="card-body">
+            <div class="card-name">Invoker</div>
+            <div class="card-role">Mid · Universal</div>
+            <div class="card-stats">
+              <div class="stat-pill"><span class="stat-label">Win%</span><span class="stat-value neutral">49.9%</span></div>
+              <div class="stat-pill"><span class="stat-label">Pick%</span><span class="stat-value neutral">28.6%</span></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- KEY MECHANICS -->
+    <section id="mechanics">
       <div class="section-header">
+        <span class="section-label">Gameplay Changes</span>
         <div class="section-line"></div>
-        <h2 class="section-title">ТІР-ЛІСТ <span class="accent-gold">ПАТЧУ 7.41</span></h2>
-        <div class="section-line"></div>
       </div>
-      <p class="section-sub">Класифікація героїв на основі відсотку перемог, популярності та ефективності у поточній меті</p>
- 
-      <!-- S TIER -->
-      <div class="tier-block" data-tier="S">
-        <div class="tier-label s-tier">
-          <span class="tier-letter">S</span>
-          <span class="tier-desc">Вищий рівень</span>
-        </div>
-        <div class="tier-heroes">
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #2a1800, #150c00);">
-              <span>VS</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Венджфул Спіріт</span>
-              <span class="hcard-role">Підтримка</span>
-              <div class="hcard-wr s">56.2%</div>
-            </div>
-            <div class="hcard-tag">БАФ</div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #001a28, #000d14);">
-              <span>PH</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Фантом Ассасін</span>
-              <span class="hcard-role">Керрі</span>
-              <div class="hcard-wr s">55.8%</div>
-            </div>
-            <div class="hcard-tag">БАФ</div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a001a, #0d000d);">
-              <span>LS</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Ліфесталкер</span>
-              <span class="hcard-role">Керрі / Підт.</span>
-              <div class="hcard-wr s">54.7%</div>
-            </div>
-            <div class="hcard-tag">БАФ</div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a1a00, #0d0d00);">
-              <span>MK</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Монкі Кінг</span>
-              <span class="hcard-role">Мідлейн</span>
-              <div class="hcard-wr s">53.9%</div>
-            </div>
-            <div class="hcard-tag">МЕТА</div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #001a10, #000d08);">
-              <span>DP</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Дет Профет</span>
-              <span class="hcard-role">Офлейн</span>
-              <div class="hcard-wr s">53.5%</div>
-            </div>
-            <div class="hcard-tag">БАФ</div>
-          </div>
-        </div>
+      <h2 class="section-title">Key Mechanics — Patch 7.41</h2>
+      <p class="section-sub">Structural changes affecting every game from draft to GG.</p>
+
+      <div class="mechanics-grid">
+
+        <article class="mechanic-card">
+          <div class="mechanic-icon" style="background: rgba(64,144,80,0.15);">🗺️</div>
+          <h3 class="mechanic-title">Map Geometry Overhaul</h3>
+          <p class="mechanic-desc">Both side lanes received cliff and tree adjustments that open new high-ground ward spots and alter smoke paths significantly.</p>
+          <ul class="change-list">
+            <li><span class="change-tag new">NEW</span>Secondary rune spawns added to river</li>
+            <li><span class="change-tag buff">BUFF</span>Radiant jungle camp stacking improved</li>
+            <li><span class="change-tag nerf">NERF</span>Dire offlane safe zone reduced</li>
+          </ul>
+        </article>
+
+        <article class="mechanic-card">
+          <div class="mechanic-icon" style="background: rgba(200,168,75,0.12);">⚡</div>
+          <h3 class="mechanic-title">Neutral Creep Rework</h3>
+          <p class="mechanic-desc">Neutral item drop rates adjusted at all tiers. Tier 1 items drop 25% more frequently, creating stronger early snowball potential.</p>
+          <ul class="change-list">
+            <li><span class="change-tag buff">BUFF</span>Tier 1 drop rate: 14% → 18%</li>
+            <li><span class="change-tag nerf">NERF</span>Tier 3 drop rate: 10% → 8%</li>
+            <li><span class="change-tag new">NEW</span>3 new Tier 2 neutral items added</li>
+          </ul>
+        </article>
+
+        <article class="mechanic-card">
+          <div class="mechanic-icon" style="background: rgba(176,96,224,0.15);">🏰</div>
+          <h3 class="mechanic-title">Tower Changes</h3>
+          <p class="mechanic-desc">Towers across all tiers received armor and damage adjustments to reduce early tower diving and extend the laning phase.</p>
+          <ul class="change-list">
+            <li><span class="change-tag buff">BUFF</span>T1 tower armor: 5 → 8</li>
+            <li><span class="change-tag nerf">NERF</span>T2 tower bounty gold reduced 12%</li>
+            <li><span class="change-tag buff">BUFF</span>Outpost vision range extended</li>
+          </ul>
+        </article>
+
+        <article class="mechanic-card">
+          <div class="mechanic-icon" style="background: rgba(224,80,80,0.12);">🐉</div>
+          <h3 class="mechanic-title">Roshan Adjustments</h3>
+          <p class="mechanic-desc">Roshan's pit location slightly shifted toward the river. Spawn timers standardized. Cheese drop rate on third kill increased.</p>
+          <ul class="change-list">
+            <li><span class="change-tag new">NEW</span>Roshan pit repositioned</li>
+            <li><span class="change-tag buff">BUFF</span>Cheese drop: 50% → 65%</li>
+            <li><span class="change-tag nerf">NERF</span>Base HP: 6500 → 6200</li>
+          </ul>
+        </article>
+
+        <article class="mechanic-card">
+          <div class="mechanic-icon" style="background: rgba(80,200,120,0.12);">🌿</div>
+          <h3 class="mechanic-title">Bounty Rune Economy</h3>
+          <p class="mechanic-desc">Bounty rune gold scaling adjusted per minute. Early game economy shifts favor aggressive trilane setups and invading jungles.</p>
+          <ul class="change-list">
+            <li><span class="change-tag buff">BUFF</span>Min 0–5 bounty gold +15</li>
+            <li><span class="change-tag nerf">NERF</span>Late-game bounty scaling nerfed</li>
+            <li><span class="change-tag buff">BUFF</span>Shared gold radius increased</li>
+          </ul>
+        </article>
+
+        <article class="mechanic-card">
+          <div class="mechanic-icon" style="background: rgba(64,144,208,0.12);">🎯</div>
+          <h3 class="mechanic-title">Spell Immunity Changes</h3>
+          <p class="mechanic-desc">Several abilities that previously pierced BKB no longer do so. This heavily buffs carry-oriented metas and reduces support dominance.</p>
+          <ul class="change-list">
+            <li><span class="change-tag nerf">NERF</span>6 abilities removed from BKB pierce</li>
+            <li><span class="change-tag buff">BUFF</span>BKB duration: 5s (lvl 1) restored</li>
+            <li><span class="change-tag new">NEW</span>Spell lifestealer passive reworked</li>
+          </ul>
+        </article>
+
       </div>
- 
-      <!-- A TIER -->
-      <div class="tier-block" data-tier="A">
-        <div class="tier-label a-tier">
-          <span class="tier-letter">A</span>
-          <span class="tier-desc">Сильний рівень</span>
-        </div>
-        <div class="tier-heroes">
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a0a28, #0d0514);">
-              <span>AM</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Анті-Маг</span>
-              <span class="hcard-role">Керрі</span>
-              <div class="hcard-wr a">52.9%</div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #28180a, #140c05);">
-              <span>LN</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Лайна</span>
-              <span class="hcard-role">Підтримка 5</span>
-              <div class="hcard-wr a">52.6%</div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #0a1a28, #050d14);">
-              <span>SB</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Спіритбрейкер</span>
-              <span class="hcard-role">Підтримка 4</span>
-              <div class="hcard-wr a">52.3%</div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #001828, #000c14);">
-              <span>PD</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Фантом Лансер</span>
-              <span class="hcard-role">Керрі</span>
-              <div class="hcard-wr a">51.8%</div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #28001a, #14000d);">
-              <span>BA</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Баратрум</span>
-              <span class="hcard-role">Офлейн</span>
-              <div class="hcard-wr a">51.5%</div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <div class="hcard-avatar" style="background: linear-gradient(135deg, #1a2800, #0d1400);">
-              <span>CM</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Крісталь Мейден</span>
-              <span class="hcard-role">Підтримка 5</span>
-              <div class="hcard-wr a">51.2%</div>
-            </div>
-          </div>
-        </div>
-      </div>
- 
-      <!-- B TIER -->
-      <div class="tier-block" data-tier="B">
-        <div class="tier-label b-tier">
-          <span class="tier-letter">B</span>
-          <span class="tier-desc">Середній рівень</span>
-        </div>
-        <div class="tier-heroes">
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #1a1428, #0d0a14);">
-              <span>SK</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Саджа Хан</span>
-              <div class="hcard-wr b">50.9%</div>
-            </div>
-          </div>
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #281400, #140a00);">
-              <span>JG</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Джаггернаут</span>
-              <div class="hcard-wr b">50.7%</div>
-            </div>
-          </div>
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #002814, #00140a);">
-              <span>TK</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Тінкер</span>
-              <div class="hcard-wr b">50.4%</div>
-            </div>
-          </div>
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #200028, #100014);">
-              <span>OD</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Аутраж Деструктор</span>
-              <div class="hcard-wr b">50.1%</div>
-            </div>
-          </div>
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #28201a, #14100d);">
-              <span>BM</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Бейнмор</span>
-              <div class="hcard-wr b">49.8%</div>
-            </div>
-          </div>
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #001428, #000a14);">
-              <span>SL</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Сайленсер</span>
-              <div class="hcard-wr b">49.5%</div>
-            </div>
-          </div>
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #281a00, #140d00);">
-              <span>WR</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Віндраннер</span>
-              <div class="hcard-wr b">49.2%</div>
-            </div>
-          </div>
-          <div class="hero-card small">
-            <div class="hcard-avatar sm" style="background: linear-gradient(135deg, #141428, #0a0a14);">
-              <span>PG</span>
-            </div>
-            <div class="hcard-body">
-              <span class="hcard-name">Пагнія</span>
-              <div class="hcard-wr b">49.0%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
- 
-  <!-- KEY CHANGES -->
-  <section id="changes" class="changes-section">
-    <div class="container">
+    </section>
+
+    <!-- ITEM CHANGES -->
+    <section id="items">
       <div class="section-header">
-        <div class="section-line"></div>
-        <h2 class="section-title">КЛЮЧОВІ <span class="accent-gold">ЗМІНИ</span> ПАТЧУ</h2>
-        <div class="section-line"></div>
-      </div>
-      <p class="section-sub">Найважливіші оновлення механік та предметів, що сформували поточну мету</p>
- 
-      <div class="changes-grid">
- 
-        <div class="change-card buff">
-          <div class="change-icon">⬆</div>
-          <div class="change-type">ПІДСИЛЕННЯ</div>
-          <h3 class="change-title">Предмети підтримки</h3>
-          <ul class="change-list">
-            <li><span class="item-name">Glimmer Cape</span> — кулдаун зменшено на 2с</li>
-            <li><span class="item-name">Force Staff</span> — відновлення мани збільшено на 1</li>
-            <li><span class="item-name">Tranquil Boots</span> — бонус HP реген +3</li>
-            <li><span class="item-name">Solar Crest</span> — броня -1 додатково</li>
-          </ul>
-        </div>
- 
-        <div class="change-card nerf">
-          <div class="change-icon">⬇</div>
-          <div class="change-type">ПОСЛАБЛЕННЯ</div>
-          <h3 class="change-title">Лісові герої</h3>
-          <ul class="change-list">
-            <li><span class="item-name">Lycan</span> — базова броня -1</li>
-            <li><span class="item-name">Enigma</span> — JFTP радіус -30</li>
-            <li><span class="item-name">Chen</span> — швидкість крипів -5%</li>
-            <li><span class="item-name">Doom</span> — час дії ульти -2с</li>
-          </ul>
-        </div>
- 
-        <div class="change-card mechanic">
-          <div class="change-icon">⚙</div>
-          <div class="change-type">МЕХАНІКИ</div>
-          <h3 class="change-title">Глобальні правила</h3>
-          <ul class="change-list">
-            <li>Нейтральні крипи — спавн вила <span class="accent-gold">7:00</span></li>
-            <li>Голем Рошана тепер дає +25 золота</li>
-            <li>Куртер спавн змінено до <span class="accent-gold">8 хв</span></li>
-            <li>XP у ранній грі +5% для позицій 1–2</li>
-          </ul>
-        </div>
- 
-        <div class="change-card item">
-          <div class="change-icon">◈</div>
-          <div class="change-type">НОВІ ПРЕДМЕТИ</div>
-          <h3 class="change-title">Оновлення магазину</h3>
-          <ul class="change-list">
-            <li><span class="item-name">Reaver's Axe</span> — новий ранній предмет</li>
-            <li><span class="item-name">Echo Sabre</span> — ціна -50 золота</li>
-            <li><span class="item-name">Manta Style</span> — IAS збільшено</li>
-            <li><span class="item-name">Black King Bar</span> — тривалість +1с (перший)</li>
-          </ul>
-        </div>
- 
-      </div>
-    </div>
-  </section>
- 
-  <!-- STATS OVERVIEW -->
-  <section id="stats" class="stats-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-line"></div>
-        <h2 class="section-title">ЗАГАЛЬНА <span class="accent-gold">СТАТИСТИКА</span></h2>
+        <span class="section-label">Item Balance</span>
         <div class="section-line"></div>
       </div>
- 
-      <div class="stats-overview-grid">
-        <div class="stat-big-card">
-          <div class="stat-icon">⚔</div>
-          <div class="stat-big-num">52.4%</div>
-          <div class="stat-big-label">Середній WR Radiant</div>
-          <div class="stat-bar-row">
-            <div class="stat-bar-fill radiant-bar" style="--w: 52.4%"></div>
-            <div class="stat-bar-fill dire-bar" style="--w: 47.6%"></div>
-          </div>
-          <div class="stat-bar-labels">
-            <span class="radiant-text">Radiant 52.4%</span>
-            <span class="dire-text">Dire 47.6%</span>
-          </div>
-        </div>
- 
-        <div class="stat-mini-grid">
-          <div class="stat-mini-card">
-            <span class="stat-mini-icon">⏱</span>
-            <span class="stat-mini-val">34.2</span>
-            <span class="stat-mini-lbl">Середня тривалість (хв)</span>
-          </div>
-          <div class="stat-mini-card">
-            <span class="stat-mini-icon">🏆</span>
-            <span class="stat-mini-val">38.7</span>
-            <span class="stat-mini-lbl">Середні вбивства/матч</span>
-          </div>
-          <div class="stat-mini-card">
-            <span class="stat-mini-icon">⚡</span>
-            <span class="stat-mini-val">89.3%</span>
-            <span class="stat-mini-lbl">Пік рейтингових ігор</span>
-          </div>
-          <div class="stat-mini-card">
-            <span class="stat-mini-icon">🎯</span>
-            <span class="stat-mini-val">4.1</span>
-            <span class="stat-mini-lbl">Середній ФПМ керрі</span>
-          </div>
-        </div>
- 
-        <div class="role-distribution">
-          <h3 class="rdist-title">Популярність ролей</h3>
-          <div class="rdist-list">
-            <div class="rdist-row">
-              <span class="rdist-role">Керрі</span>
-              <div class="rdist-bar-track">
-                <div class="rdist-bar" style="--w: 71%; --c: #c8a84b;"></div>
-              </div>
-              <span class="rdist-pct">71%</span>
-            </div>
-            <div class="rdist-row">
-              <span class="rdist-role">Мідлейн</span>
-              <div class="rdist-bar-track">
-                <div class="rdist-bar" style="--w: 67%; --c: #c84b4b;"></div>
-              </div>
-              <span class="rdist-pct">67%</span>
-            </div>
-            <div class="rdist-row">
-              <span class="rdist-role">Офлейн</span>
-              <div class="rdist-bar-track">
-                <div class="rdist-bar" style="--w: 59%; --c: #4bc8a8;"></div>
-              </div>
-              <span class="rdist-pct">59%</span>
-            </div>
-            <div class="rdist-row">
-              <span class="rdist-role">Підтримка 4</span>
-              <div class="rdist-bar-track">
-                <div class="rdist-bar" style="--w: 54%; --c: #4b8bc8;"></div>
-              </div>
-              <span class="rdist-pct">54%</span>
-            </div>
-            <div class="rdist-row">
-              <span class="rdist-role">Підтримка 5</span>
-              <div class="rdist-bar-track">
-                <div class="rdist-bar" style="--w: 48%; --c: #a84bc8;"></div>
-              </div>
-              <span class="rdist-pct">48%</span>
-            </div>
-          </div>
-        </div>
+      <h2 class="section-title">Notable Item Changes</h2>
+      <p class="section-sub">High-impact item adjustments shaping the current item build meta.</p>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; overflow: hidden; backdrop-filter: blur(8px);">
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Category</th>
+              <th>Change</th>
+              <th>Impact</th>
+              <th>Cost Δ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="item-emoji">⚡</span><span class="item-name">Aghanim's Scepter</span></td>
+              <td>Upgrade</td>
+              <td><span class="change-tag buff">BUFF</span></td>
+              <td>Ability upgrades improved on 8 heroes</td>
+              <td class="change-negative">+150g</td>
+            </tr>
+            <tr>
+              <td><span class="item-emoji">🌀</span><span class="item-name">Eul's Scepter</span></td>
+              <td>Utility</td>
+              <td><span class="change-tag buff">BUFF</span></td>
+              <td>Cast range +50, duration unchanged</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="item-emoji">🛡️</span><span class="item-name">Pipe of Insight</span></td>
+              <td>Armor</td>
+              <td><span class="change-tag nerf">NERF</span></td>
+              <td>Barrier HP 450 → 375</td>
+              <td class="change-positive">-100g</td>
+            </tr>
+            <tr>
+              <td><span class="item-emoji">🗡️</span><span class="item-name">Desolator</span></td>
+              <td>Damage</td>
+              <td><span class="change-tag nerf">NERF</span></td>
+              <td>Corruption armor reduction: -6 → -5</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="item-emoji">✨</span><span class="item-name">Gleipnir</span></td>
+              <td>CC</td>
+              <td><span class="change-tag buff">BUFF</span></td>
+              <td>Root duration 2.0 → 2.5s</td>
+              <td class="change-negative">+200g</td>
+            </tr>
+            <tr>
+              <td><span class="item-emoji">🔥</span><span class="item-name">Radiance</span></td>
+              <td>Carry</td>
+              <td><span class="change-tag buff">BUFF</span></td>
+              <td>Burn damage 60 → 70 DPS</td>
+              <td class="change-negative">+150g</td>
+            </tr>
+            <tr>
+              <td><span class="item-emoji">💚</span><span class="item-name">Wraith Pact</span></td>
+              <td>Utility</td>
+              <td><span class="change-tag nerf">NERF</span></td>
+              <td>Totem HP 750 → 550, aura radius -50</td>
+              <td class="change-positive">-300g</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
-  </section>
- 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-hex-row">
-      <span class="fhex">⬡</span><span class="fhex">⬡</span><span class="fhex">⬡</span><span class="fhex">⬡</span><span class="fhex">⬡</span>
-    </div>
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="logo-icon">⬡</span>
-        <span class="footer-name">DOTA 2 МЕТА 7.41</span>
-      </div>
-      <p class="footer-desc">
-        Аналітичний ресурс на основі даних <span class="accent-gold">Dotabuff</span>, <span class="accent-gold">Stratz</span> та офіційних нотаток до патчу.<br/>
-        Усі права на Dota 2 належать <span class="accent-gold">Valve Corporation</span>.
-      </p>
-      <div class="footer-links">
-        <a href="https://dotabuff.com" target="_blank">Dotabuff</a>
-        <a href="https://stratz.com" target="_blank">Stratz</a>
-        <a href="https://dota2.com" target="_blank">Dota 2</a>
-      </div>
-      <p class="footer-copy">© 2024 Навчальний проект | Зроблено для коледжу</p>
-    </div>
-  </footer>
- 
-</body>
-</html>
- 
+    </section>
+
+    <footer>
+      <p>DOTASTATE — Patch 7.41 Meta Analysis | <span>Data: Divine+ Bracket</span> | Not affiliated with Valve Corporation</p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  const filters = document.querySelectorAll('.tier-btn');
+  const cards = document.querySelectorAll('.hero-card');
+  const searchInput = document.getElementById('heroSearch');
+
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function applyFilters() {
+    cards.forEach(card => {
+      const tier = card.dataset.tier;
+      const name = card.dataset.name;
+      const tierMatch = activeFilter === 'all' || tier === activeFilter;
+      const nameMatch = name.includes(searchQuery.toLowerCase());
+      card.classList.toggle('hidden', !(tierMatch && nameMatch));
+    });
+  }
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', e => {
+    searchQuery = e.target.value.trim().toLowerCase();
+    applyFilters();
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.getAttribute('href');
+      document.querySelector(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+</script>
